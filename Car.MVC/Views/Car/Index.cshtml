@@ -45,7 +45,11 @@
                 <p class="card-text"><b>Rok produkcji:</b> @item.ProductionYear</p>
                 <p class="card-text"><b>Numer rejestracyjny:</b> @item.RegistrationNumber</p>
                 <p class="card-text"><b>VIN:</b> @item.VIN</p>
-                <a asp-controller="Car" asp-action="Edit" asp-route-id="@item.Id" class="btn btn-primary">Edytuj</a>
+            
+                @if(item.IsEditable)
+                {
+                    <a asp-controller="Car" asp-action="Edit" asp-route-id="@item.Id" class="btn btn-primary">Edytuj</a>
+                }
                 <a href="#" class="btn btn-danger">Usuń</a>
                 </div>
         </div>

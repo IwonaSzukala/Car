@@ -1,4 +1,5 @@
-﻿using Car.Domain.Interfaces;
+﻿using Car.Application.ApplicationUserFolder;
+using Car.Domain.Interfaces;
 using MediatR;
 using System;
 using System.Collections.Generic;
@@ -11,14 +12,23 @@ namespace Car.Application.Car.Commands.EditCar
     public class EditCarCommandHandler : IRequestHandler<EditCarCommand>
     {
         private readonly ICarRepository _repository;
-        public EditCarCommandHandler(ICarRepository repository)
+        private readonly IUserContext _userContext;
+        public EditCarCommandHandler(ICarRepository repository, IUserContext userContext)
         {
         
             _repository = repository;
+            _userContext = userContext;
         }
         public async Task<Unit> Handle(EditCarCommand? request, CancellationToken cancellationToken)
         {
             var car = await _repository.GetById(request.Id);
+            var user = _userContext.GetCurrentUser();
+            var isEditible = user != null && car.CreatedById == user.Id;
+
+            if (isEditible) 
+            {
+                return Unit.Value;
+            }
 
             car.CarBrand = request.CarBrand;
             car.CarModel = request.CarModel;
