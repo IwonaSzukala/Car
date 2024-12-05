@@ -1,0 +1,81 @@
+﻿@using Car.Application.Car.Commands.CreateUser
+@model CreateUserCommand;
+
+<h1>Create User</h1>
+
+<hr />
+
+<div class="row">
+    <div class="col-md4">
+        <form action="/User/Create" method="post">
+            
+            <div class="form-group mb-3">
+                <label class="control-label" asp-for="Username">Username</label>
+                <input class="form-control" type="text" id="Username" asp-for="Username" />
+                <span asp-validation-for="Username" class="text-danger"></span>
+            </div>
+
+
+            <div class="form-group mb-3">
+                <label class="control-label" asp-for="FirstName">First Name</label>
+                <input class="form-control" type="text" id="FirstName" asp-for="FirstName" />
+                <span asp-validation-for="FirstName" class="text-danger"></span>
+            </div>
+
+            <div class="form-group mb-3">
+                <label class="control-label" asp-for="LastName">Last Name</label>
+                <input class="form-control" type="text" id="LastName" asp-for="LastName" />
+                <span asp-validation-for="LastName" class="text-danger"></span>
+            </div>
+
+            <div class="form-group mb-3">
+                <label class="control-label" asp-for="Email">E-mail</label>
+                <input class="form-control" type="email" id="Email" asp-for="Email" />
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+
+            <div class="form-group mb-3">
+                <label class="control-label" asp-for="Password">Password</label>
+                <input class="form-control" type="password" id="Password" asp-for="Password" />
+                <span asp-validation-for="Password" class="text-danger"></span>
+            </div>
+
+            <div class="form-group mb-3">
+                <label class="control-label" asp-for="PhoneNumber">Phone Number</label>
+                <input class="form-control" type="text" id="PhoneNumber" asp-for="PhoneNumber" />
+                <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+            </div>
+
+            <div class="form-group mb-3">
+                <label class="control-label" asp-for="Street">Street</label>
+                <input class="form-control" type="text" id="Street" asp-for="Street" />
+                <span asp-validation-for="Street" class="text-danger"></span>
+            </div>
+
+            <div class="form-group mb-3">
+                <label class="control-label" asp-for="City">City</label>
+                <input class="form-control" type="text" id="City" asp-for="City" />
+                <span asp-validation-for="City" class="text-danger"></span>
+            </div>
+
+            <div class="form-group mb-3">
+                <label class="control-label" asp-for="PostalCode">Postal Code</label>
+                <input class="form-control" type="text" id="PostalCode" asp-for="PostalCode" />
+                <span asp-validation-for="PostalCode" class="text-danger"></span>
+            </div>
+
+
+
+            <div class="form-group mb-3">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

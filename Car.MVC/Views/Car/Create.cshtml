@@ -1,0 +1,102 @@
+﻿@using Car.Application.Car;
+@using Car.Application.Car.Commands.CreateCar
+@using System.Security.Claims;
+@model CreateCarCommand;
+
+<h1>Create Car</h1>
+
+<hr />
+
+<div class="row">
+    <div class="col-md4">
+        <form action="/Car/Create" method="post">
+
+                <input class="form-control" type="hidden" id="UserId" asp-for="UserId" value="@User.FindFirstValue(ClaimTypes.NameIdentifier)"/>
+
+
+
+            <div class="form-group mb-3">
+                <label class="control-label" asp-for="CarBrand">Car Brand</label>
+                <input class="form-control" type="text" id="CarBrand" asp-for="CarBrand" />
+                <span asp-validation-for="CarBrand" class="text-danger"></span>
+            </div>
+
+            <div class="form-group mb-3">
+                <label class="control-label" asp-for="CarModel">Car Model</label>
+                <input class="form-control" type="text" id="CarModel" asp-for="CarModel" />
+                <span asp-validation-for="CarModel" class="text-danger"></span>
+            </div>
+
+            <div class="form-group mb-3">
+                <label class="control-label" asp-for="ProductionYear">Production Year</label>
+                <input class="form-control" type="text" id="ProductionYear" asp-for="ProductionYear" />
+                <span asp-validation-for="ProductionYear" class="text-danger"></span>
+            </div>
+
+            <div class="form-group mb-3">
+                <label class="control-label" asp-for="RegistrationNumber">Registration Number</label>
+                <input class="form-control" type="text" id="RegistrationNumber" asp-for="RegistrationNumber" />
+                <span asp-validation-for="RegistrationNumber" class="text-danger"></span>
+            </div>
+
+            <div class="form-group mb-3">
+                <label class="control-label" asp-for="VIN">VIN</label>
+                <input class="form-control" type="text" id="VIN" asp-for="VIN" />
+                <span asp-validation-for="VIN" class="text-danger"></span>
+            </div>
+
+            @*<div class="form-group mb-3">
+                <label class="control-label" for="FirstName">First Name</label>
+                <input class="form-control" type="text" id="FirstName" name="User.FirstName" />
+            </div>
+
+            <div class="form-group mb-3">
+                <label class="control-label" for="LastName">Last Name</label>
+                <input class="form-control" type="text" id="LastName" name="User.LastName" />
+            </div>
+
+            <div class="form-group mb-3">
+                <label class="control-label" for="Email">E-mail</label>
+                <input class="form-control" type="email" id="Email" name="User.Email" />
+            </div>
+
+            <div class="form-group mb-3">
+                <label class="control-label" for="Password">Password</label>
+                <input class="form-control" type="password" id="Password" name="User.Password" />
+            </div>
+
+            <div class="form-group mb-3">
+                <label class="control-label" for="PhoneNumber">Phone Number</label>
+                <input class="form-control" type="tel" id="PhoneNumber" name="UserContactDetails.PhoneNumber" />
+            </div>
+
+            <div class="form-group mb-3">
+                <label class="control-label" for="Street">Street</label>
+                <input class="form-control" type="text" id="Street" name="UserContactDetails.Street" />
+            </div>
+
+            <div class="form-group mb-3">
+                <label class="control-label" for="City">City</label>
+                <input class="form-control" type="text" id="City" name="UserContactDetails.City" />
+            </div>
+
+            <div class="form-group mb-3">
+                <label class="control-label" for="PostalCode">Postal Code</label>
+                <input class="form-control" type="text" id="PostalCode" name="UserContactDetails.PostalCode" />
+            </div>*@
+
+            
+
+            <div class="form-group mb-3">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+            
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
