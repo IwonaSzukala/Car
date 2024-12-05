@@ -34,34 +34,44 @@ namespace Car.Application.Extensions
             services.AddAutoMapper(typeof(UserMappingProfile));
             services.AddAutoMapper(typeof(RepairMappingProfile));
             services.AddAutoMapper(typeof(RepairWithCarMappingProfile));*/
-            services.AddScoped(provider => new MapperConfiguration(cfg =>
-            {
-                var scope = provider.CreateScope();
-                var userContext = scope.ServiceProvider.GetRequiredService<IUserContext>();
-                cfg.AddProfile(new CarMappingProfile(userContext)); //chat dodał mi usercontext w nawiasie
-            }).CreateMapper()
-            );
+            /*            services.AddScoped(provider => new MapperConfiguration(cfg =>
+                        {
+                            var scope = provider.CreateScope();
+                            var userContext = scope.ServiceProvider.GetRequiredService<IUserContext>();
+                            cfg.AddProfile(new CarMappingProfile(userContext)); //chat dodał mi usercontext w nawiasie
+                        }).CreateMapper()
+                        );
 
+                        services.AddScoped(provider => new MapperConfiguration(cfg =>
+                        {
+                            var scope = provider.CreateScope();
+                            var userContext = scope.ServiceProvider.GetRequiredService<IUserContext>();
+                            cfg.AddProfile(new RepairMappingProfile(userContext));
+                        }).CreateMapper()
+                        );
+
+                        services.AddScoped(provider => new MapperConfiguration(cfg =>
+                        {
+                            var scope = provider.CreateScope();
+                            var userContext = scope.ServiceProvider.GetRequiredService<IUserContext>();
+                            cfg.AddProfile(new RepairWithCarMappingProfile(userContext));
+                        }).CreateMapper()
+                        );
+
+                        services.AddScoped(provider => new MapperConfiguration(cfg =>
+                        {
+                            var scope = provider.CreateScope();
+                            var userContext = scope.ServiceProvider.GetRequiredService<IUserContext>();
+                            cfg.AddProfile(new UserMappingProfile());
+                        }).CreateMapper()
+                        );*/
             services.AddScoped(provider => new MapperConfiguration(cfg =>
             {
                 var scope = provider.CreateScope();
                 var userContext = scope.ServiceProvider.GetRequiredService<IUserContext>();
+                cfg.AddProfile(new CarMappingProfile(userContext));
                 cfg.AddProfile(new RepairMappingProfile(userContext));
-            }).CreateMapper()
-            );
-
-            services.AddScoped(provider => new MapperConfiguration(cfg =>
-            {
-                var scope = provider.CreateScope();
-                var userContext = scope.ServiceProvider.GetRequiredService<IUserContext>();
                 cfg.AddProfile(new RepairWithCarMappingProfile(userContext));
-            }).CreateMapper()
-            );
-
-            services.AddScoped(provider => new MapperConfiguration(cfg =>
-            {
-                var scope = provider.CreateScope();
-                var userContext = scope.ServiceProvider.GetRequiredService<IUserContext>();
                 cfg.AddProfile(new UserMappingProfile());
             }).CreateMapper()
             );

@@ -17,15 +17,14 @@ namespace Car.Application.Mappings
         {
             var user = userContext.GetCurrentUser();
             CreateMap<Domain.Entities.Repair, RepairWithCarDto>()
-                .ForMember(dto => dto.IsEditable, opt => opt.MapFrom(src => user != null && src.CreatedById == user.Id))
-                .ForMember(dto => dto.IsVisible, opt => opt.MapFrom(src => user != null && src.CreatedById == user.Id))
                 .ForMember(dest => dest.CarBrand, opt => opt.MapFrom(src => src.Car.CarBrand))
                 .ForMember(dest => dest.CarModel, opt => opt.MapFrom(src => src.Car.CarModel))
                 .ForMember(dest => dest.MechanicId, opt => opt.MapFrom(src => src.MechanicId))
                 .ForMember(dest => dest.ReservationDate, opt => opt.MapFrom(src => src.ReservationDate))
                 .ForMember(dest => dest.Information, opt => opt.MapFrom(src => src.Information))
-                .ForMember(dest => dest.Status, opt => opt.MapFrom(src => src.Status));
-                
+                .ForMember(dest => dest.Status, opt => opt.MapFrom(src => src.Status))
+                .ForMember(dto => dto.IsEditable, opt => opt.MapFrom(src => user != null && src.CreatedById == user.Id))
+                .ForMember(dto => dto.IsVisible, opt => opt.MapFrom(src => user != null && src.CreatedById == user.Id)); 
 
             CreateMap<RepairWithCarDto, EditRepairCommand>();
         }
