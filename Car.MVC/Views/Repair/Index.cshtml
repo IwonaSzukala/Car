@@ -67,14 +67,14 @@
                         @Html.DisplayFor(modelItem => item.Status)
                     </td>
                     <td>
-                        
-                        @*@if (item.IsEditable)
+
+                        @if (item.IsEditable && (User.IsInRole("Mechanic") || User.IsInRole("Administrator")))
                         {
-                            <a asp-controller="Repair" asp-action="Edit" asp-route-id="@item.Id" class="btn btn-primary">Edytuj</a> TO ZROBIĆ DLA MECHANIKÓW
-                        }*@
-                        <a asp-controller="Repair" asp-action="Edit" asp-route-id="@item.Id" class="btn btn-primary">Edytuj</a>
-                        @Html.ActionLink("Details", "Details", new { id = item.Id }) |
-                        @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+                            <a asp-controller="Repair" asp-action="Edit" asp-route-id="@item.Id" class="btn btn-primary">Edytuj</a>
+                        }
+                        
+                        @* @Html.ActionLink("Details", "Details", new { id = item.Id }) |
+                        @Html.ActionLink("Delete", "Delete", new { id = item.Id }) *@
                     </td>
                 </tr>
             }

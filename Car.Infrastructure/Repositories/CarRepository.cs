@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+
 namespace Car.Infrastructure.Repositories
 {
     internal class CarRepository : ICarRepository
@@ -25,8 +26,15 @@ namespace Car.Infrastructure.Repositories
         public async Task<IEnumerable<Domain.Entities.Car>> GetAll()
             => await _dbContext.Cars.ToListAsync();
 
-        public async Task<Domain.Entities.Car> GetByUsername(string username)
-        => await _dbContext.Cars.Include(c => c.User).FirstAsync(c => c.User.UserName == username);
+        /*public async Task<Domain.Entities.Car?> GetByUsername(string username)
+        => await _dbContext.Cars.Include(c => c.User).FirstAsync(c => c.User.UserName == username);*/
+
+        public async Task<Domain.Entities.Car?> GetByUsername(string username)
+        {
+            return await _dbContext.Cars
+                .Include(c => c.User)
+                .FirstOrDefaultAsync(c => c.User.UserName == username);
+        }
 
         public Task<Domain.Entities.Car?> GetByRegistrationNumber(string registrationNumber)
             => _dbContext.Cars.FirstOrDefaultAsync(cw => cw.RegistrationNumber.ToLower() == registrationNumber.ToLower());
@@ -39,5 +47,11 @@ namespace Car.Infrastructure.Repositories
 
         public Task Commit()
             => _dbContext.SaveChangesAsync();
+
+        public async Task Delete(Domain.Entities.Car car)
+        {
+            _dbContext.Cars.Remove(car);
+            await Commit();
+        }
     }
 }

@@ -104,7 +104,11 @@
                 <td>@Html.DisplayFor(modelItem => item.Information)</td>
                 <td>@Html.DisplayFor(modelItem => item.Status)</td>
                 <td>
-                    <a asp-controller="Repair" asp-action="Edit" asp-route-id="@item.Id" class="btn btn-primary">Edytuj</a>
+                    @* <a asp-controller="Repair" asp-action="Edit" asp-route-id="@item.Id" class="btn btn-primary">Edytuj</a> *@
+                    @if (item.IsEditable && (User.IsInRole("Mechanic") || User.IsInRole("Administrator")))
+                    {
+                        <a asp-controller="Repair" asp-action="Edit" asp-route-id="@item.Id" class="btn btn-primary">Edytuj</a>
+                    }
                 </td>
             </tr>
         }

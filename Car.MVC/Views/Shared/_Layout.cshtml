@@ -34,9 +34,32 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark @(controller == "Home" && action == "About" ? "active" : "")" asp-area="" asp-controller="Home" asp-action="About">About</a>
                         </li>
-                        <li class="nav-item">
+                        @* <li class="nav-item">
                             <a class="nav-link text-dark @(controller == "Car" && action == "Index" ? "active" : "")" asp-area="" asp-controller="Car" asp-action="Index">Moje samochody</a>
-                        </li>
+                        </li> *@
+                        <!-- Moje samochody -->
+    <li class="nav-item">
+        <a class="nav-link text-dark @(controller == "Car" && action == "Index" ? "active" : "")" 
+           asp-area="" asp-controller="Car" asp-action="Index">Moje samochody</a>
+    </li>
+
+    <!-- Moje naprawy -->
+    @if (User.Identity.IsAuthenticated)
+    {
+        <li class="nav-item">
+            <a class="nav-link text-dark @(controller == "Repair" && action == "Index" ? "active" : "")" 
+               asp-area="" asp-controller="Repair" asp-action="Index">Moje naprawy</a>
+        </li>
+    }
+
+    <!-- Zarządzanie -->
+                        @if (User.IsInRole("Admin") || User.IsInRole("Mechanic"))
+                        {
+            <li class="nav-item">
+                <a class="nav-link text-dark @(controller == "User" && action == "Index" ? "active" : "")" 
+                   asp-area="" asp-controller="User" asp-action="Index">Zarządzanie</a>
+            </li>
+                        }
                     </ul>
                     <partial name="_LoginPartial"/>
                 </div>

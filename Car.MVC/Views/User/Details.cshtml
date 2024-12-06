@@ -71,9 +71,9 @@
     ViewData["Title"] = "Samochody użytkownika";
 }
 
-<h1>Samochody użytkownika @Model.User.FirstName @Model.User.LastName</h1>
+@* <h1>Samochody użytkownika @Model.User.FirstName @Model.User.LastName</h1> *@
 
-<div class="row">
+@* <div class="row">
     <div class="card m-3" style="width: 18rem;">
         <div class="card-body">
             <h4 class="card-title">Marka: @Model.CarBrand</h4>
@@ -86,5 +86,27 @@
             <a asp-action="Index" class="btn btn-secondary">Powrót do listy</a>
         </div>
     </div>
-</div>
+</div> *@
+
+@if (Model == null)
+{
+    <p>Użytkownik nie posiada żadnych samochodów.</p>
+}
+else
+{
+    <div class="row">
+        <div class="card m-3" style="width: 18rem;">
+            <div class="card-body">
+                <h4 class="card-title">Marka: @Model.CarBrand</h4>
+                <h5 class="card-subtitle mb-2 text-muted">Model: @Model.CarModel</h5>
+                <p class="card-text"><b>Id użytkownika:</b> @Model.UserId</p>
+                <p class="card-text"><b>Rok produkcji:</b> @Model.ProductionYear</p>
+                <p class="card-text"><b>Numer rejestracyjny:</b> @Model.RegistrationNumber</p>
+                <p class="card-text"><b>VIN:</b> @Model.VIN</p>
+                <a asp-controller="Car" asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-primary">Edytuj</a>
+                <a asp-action="Index" class="btn btn-secondary">Powrót do listy</a>
+            </div>
+        </div>
+    </div>
+}
 

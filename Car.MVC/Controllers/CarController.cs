@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Car.Application.Car;
 using Car.Application.Car.Commands.CreateCar;
+using Car.Application.Car.Commands.DeleteCar;
 using Car.Application.Car.Commands.EditCar;
 using Car.Application.Car.Queries.GetAllCars;
 using Car.Application.Car.Queries.GetById;
@@ -95,6 +96,15 @@ namespace Car.MVC.Controllers
             EditCarCommand model = _mapper.Map<EditCarCommand>(dto);
             
             return View(model);
+        }
+
+        [HttpPost]
+        [Authorize]
+        [Route("Car/{id}/Delete")]
+        public async Task<IActionResult> Delete(int id)
+        {
+            await _mediator.Send(new DeleteCarCommand { Id = id });
+            return RedirectToAction(nameof(Index));
         }
     }
 }

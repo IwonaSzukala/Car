@@ -15,5 +15,6 @@ namespace Car.Domain.Interfaces
         Task<Domain.Entities.Car?> GetByRegistrationNumber(string registrationNumber);
         Task<Domain.Entities.Car?> GetByVIN(string vin);
         Task Commit();
+        Task Delete(Entities.Car? car);
     }
 }

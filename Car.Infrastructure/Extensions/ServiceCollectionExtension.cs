@@ -1,8 +1,10 @@
 ﻿using Car.Application.ApplicationUserFolder;
+using Car.Application.Car.Commands.DeleteCar;
 using Car.Domain.Entities;
 using Car.Domain.Interfaces;
 using Car.Infrastructure.Persistence;
 using Car.Infrastructure.Repositories;
+using MediatR;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -32,6 +34,8 @@ namespace Car.Infrastructure.Extensions
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<IRepairRepository, RepairRepository>();
             services.AddScoped<IUserContext, UserContext>();
+
+            services.AddMediatR(typeof(DeleteCarCommand));
         }
     }
 }

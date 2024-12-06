@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using MediatR;
 
 namespace Car.Application.Car.Commands.DeleteCar
 {
-    internal class DeleteCarCommand
+    public class DeleteCarCommand : IRequest
     {
+        public int Id { get; set; }
     }
 }

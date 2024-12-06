@@ -42,12 +42,27 @@ namespace Car.MVC.Controllers
             return View();
         }
 
-        [Route("User/{username}/Cars")]
+        /*[Route("User/{username}/Cars")]
         public async Task<IActionResult> Details(string username)
         {
             var dto = await _mediator.Send(new GetCarsByUsernameQuery(username));   
             return View(dto);
+        }*/
+
+        [Route("User/{username}/Cars")]
+        public async Task<IActionResult> Details(string username)
+        {
+            var carDto = await _mediator.Send(new GetCarsByUsernameQuery(username));
+
+            if (carDto == null)
+            {
+                ViewBag.Message = "U¿ytkownik nie posiada ¿adnych samochodów.";
+                return View(); // Wyœwietl widok z odpowiednim komunikatem.
+            }
+
+            return View(carDto); // Jeœli jest samochód, zwróæ go do widoku.
         }
+
 
         //[Route("User/{username}/Edit")]
         //public async Task<IActionResult> Edit(string username)
