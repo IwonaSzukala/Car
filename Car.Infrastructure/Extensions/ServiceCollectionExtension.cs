@@ -25,6 +25,7 @@ namespace Car.Infrastructure.Extensions
             /*services.AddDefaultIdentity<CarDbContext>()
                 .AddEntityFrameworkStores<CarDbContext>();*/
             services.AddDefaultIdentity<ApplicationUser>()
+                .AddRoles<IdentityRole>()
                 .AddEntityFrameworkStores<CarDbContext>();
 
             services.AddScoped<ICarRepository, CarRepository>();

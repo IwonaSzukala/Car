@@ -48,7 +48,7 @@ namespace Car.MVC.Controllers
         }
 
         [HttpPost]
-        [Authorize]
+        [Authorize(Roles = "Mechanic, Admin")]
         [Route("Repair/{id}/Edit")]
         public async Task<IActionResult> Edit(int id, EditRepairCommand command)
         {
@@ -60,6 +60,7 @@ namespace Car.MVC.Controllers
             return RedirectToAction(nameof(Index)); //todo
         }
 
+        [Authorize]
         public async Task<IActionResult> Index()
         {
             var repairs = await _mediator.Send(new GetAllRepairsQuery());
@@ -75,22 +76,23 @@ namespace Car.MVC.Controllers
             return View(repairs);
         }
 
-        [Authorize]
+        [Authorize(Roles = "Mechanic, Admin")]
         [Route("Repair/{id}/Edit")]
         public async Task<IActionResult> Edit(int id)
         {
             
             var dto = await _mediator.Send(new GetRepairByIdQuery(id));
 
-            if (!dto.IsEditable)
-            {
-                return RedirectToAction("NoAccess", "Home");
-            }
 
-            if (!dto.IsVisible)
+            /*if (!dto.IsEditable)
             {
                 return RedirectToAction("NoAccess", "Home");
-            }
+            }*/
+
+            /*if (!dto.IsVisible)
+            {
+                return RedirectToAction("NoAccess", "Home");
+            }*/ //BO WTEDY NIE DZIA£A ZMIANA DLA ADMINA
 
             EditRepairCommand model = _mapper.Map<EditRepairCommand>(dto);
 

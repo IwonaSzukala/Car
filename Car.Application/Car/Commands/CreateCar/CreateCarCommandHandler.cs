@@ -24,6 +24,11 @@ namespace Car.Application.Car.Commands.CreateCar
         }
         public async Task<Unit> Handle(CreateCarCommand request, CancellationToken cancellationToken)
         {
+            /*var currentUser = _userContext.GetCurrentUser();
+            if (currentUser == null || !currentUser.IsInRole("Owner")
+            {
+                return Unit.Value;
+            }*/
             var car = _mapper.Map<Domain.Entities.Car>(request);
 
             car.CreatedById = _userContext.GetCurrentUser().Id;

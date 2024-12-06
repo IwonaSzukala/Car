@@ -1,3 +1,4 @@
+using Car.Application.ApplicationUserFolder;
 using Car.Application.Car.Commands.EditCar;
 using Car.Domain.Interfaces;
 using MediatR;
@@ -14,19 +15,29 @@ namespace Car.Application.Car.Commands.EditRepair
     public class EditRepairCommandHandler : IRequestHandler<EditRepairCommand>
     {
         private readonly IRepairRepository _repository;
-        public EditRepairCommandHandler(IRepairRepository repository)
+        private readonly IUserContext _userContext;
+        public EditRepairCommandHandler(IRepairRepository repository, IUserContext userContext)
         {
 
             _repository = repository;
+            _userContext = userContext;
         }
         public async Task<Unit> Handle(EditRepairCommand? request, CancellationToken cancellationToken)
         {
+            var currentUser = _userContext.GetCurrentUser();
+            if (currentUser == null || !currentUser.IsInRole("Mechanic, Admin"))
+            {
+                return Unit.Value;
+            }
+
             var repair = await _repository.GetById(request.Id);
 
             repair.MechanicId = request.MechanicId;
             repair.ReservationDate = request.ReservationDate;
             repair.Information = request.Information;
             repair.Status = request.Status;
+
+            repair.CreatedById = currentUser.Id; //do edytowania naprawy
               
             await _repository.Commit();
             return Unit.Value;

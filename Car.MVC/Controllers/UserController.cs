@@ -8,7 +8,9 @@ using Car.Application.Car.Queries.GetAllUsers;
 using Car.Application.Car.Queries.GetById;
 using Car.Application.Car.Queries.GetByUsername;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.Data;
 
 namespace Car.MVC.Controllers
 
@@ -26,6 +28,7 @@ namespace Car.MVC.Controllers
             _mapper = mapper;
         }
 
+        [Authorize(Roles = "Mechanic, Admin")]
         public async Task<IActionResult> Index()
         {
             var users = await _mediator.Send(new GetAllUsersQuery());
@@ -66,6 +69,7 @@ namespace Car.MVC.Controllers
 
         [HttpPost]
         [Route("User/{id}/Edit")]
+        [Authorize(Roles = "Mechanic, Admin")]
         public async Task<IActionResult> Edit(int id, EditUserCommand command)
         {
             if (!ModelState.IsValid)
@@ -86,6 +90,7 @@ namespace Car.MVC.Controllers
             return View(model);
         }*/
         [Route("User/{id}/Edit")]
+        [Authorize(Roles = "Mechanic, Admin")]
         public async Task<IActionResult> Edit(string id)
         {
             var dto = await _mediator.Send(new GetUserByIdQuery(id));
