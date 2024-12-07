@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Car.Domain.Entities;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -14,7 +15,9 @@ namespace Car.Domain.Interfaces
         Task<Domain.Entities.Car?> GetById(int id);
         Task<Domain.Entities.Car?> GetByRegistrationNumber(string registrationNumber);
         Task<Domain.Entities.Car?> GetByVIN(string vin);
+        Task<IEnumerable<Domain.Entities.Car?>> GetCarsByUserId(string userId);
         Task Commit();
         Task Delete(Entities.Car? car);
+        
     }
 }

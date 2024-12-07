@@ -1,13 +1,13 @@
 ﻿@using Car.Application.Car.Commands.CreateRepair
-@model CreateRepairCommand;
+@using Car.Domain.Entities
+@model CreateRepairViewModel;
 
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "Umów wizytę";
 }
 
-<h1>Create</h1>
+<h1>Umów wizytę</h1>
 
-<h4>Repair</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
@@ -19,24 +19,51 @@
                 <span asp-validation-for="Id" class="text-danger"></span>
             </div>*@
             <div class="form-group">
-                <label asp-for="CarId" class="control-label"></label>
-                <input asp-for="CarId" class="form-control" />
-                <span asp-validation-for="CarId" class="text-danger"></span>
+            <select asp-for="CreateRepairCommand.MechanicId">
+                    @foreach (var mechanic in Model.Mechanics)
+                    {
+                        <option value="@mechanic.Id">
+                            @mechanic.FirstName @mechanic.LastName
+                        </option>
+                    }
+            </select>
             </div>
-             <div class="form-group">
+            <div class="form-group">
+                <select asp-for="CreateRepairCommand.CarId">
+                    @foreach (var car in Model.Cars)
+                    {
+                        <option value="@car.Id">
+                            @car.CarBrand @car.CarModel VIN: @car.VIN
+                        </option>
+                    }
+                </select>
+            </div>@* 
+           <div class="form-group">
+                <label asp-for="CreateRepairCommand.CarId" class="control-label"></label>
+                <input asp-for="CreateRepairCommand.CarId" class="form-control" />
+                <span asp-validation-for="CreateRepairCommand.CarId" class="text-danger"></span> 
+            </div> *@
+            @* <div class="form-group">
+                <label asp-for="CarId" class="control-label"></label>
+                <select asp-for="CarId" class="form-control" asp-items="CarModel.Cars">
+                    <option value="">-- Wybierz pojazd --</option>
+                </select>
+                <span asp-validation-for="CarId" class="text-danger"></span>
+            </div> *@
+            @*  <div class="form-group">
                 <label asp-for="MechanicId" class="control-label"></label>
                 <input asp-for="MechanicId" class="form-control" />
                 <span asp-validation-for="MechanicId" class="text-danger"></span>
-            </div> 
+            </div>  *@
+            @* <div class="form-group">
+                <label asp-for="CreateRepairCommand.ReservationDate" class="control-label"></label>
+                <input asp-for="CreateRepairCommand.ReservationDate" class="form-control" />
+                <span asp-validation-for="CreateRepairCommand.ReservationDate" class="text-danger"></span>
+            </div> *@
             <div class="form-group">
-                <label asp-for="ReservationDate" class="control-label"></label>
-                <input asp-for="ReservationDate" class="form-control" />
-                <span asp-validation-for="ReservationDate" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Information" class="control-label"></label>
-                <input asp-for="Information" class="form-control" />
-                <span asp-validation-for="Information" class="text-danger"></span>
+                <label asp-for="CreateRepairCommand.Information" class="control-label">Informacja do mechanika</label>
+                <input asp-for="CreateRepairCommand.Information" class="form-control" />
+                <span asp-validation-for="CreateRepairCommand.Information" class="text-danger"></span>
             </div>
             @*<div class="form-group">
                 <label asp-for="Status" class="control-label"></label>
@@ -44,14 +71,14 @@
                 <span asp-validation-for="Status" class="text-danger"></span>
             </div>*@
             <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+                <input type="submit" value="Umów" class="btn btn-primary" />
             </div>
         </form>
     </div>
 </div>
 
 <div>
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Index">Wróć do listy</a>
 </div>
 
 @section Scripts {

@@ -74,13 +74,13 @@
 @model IEnumerable<Car.Application.Car.RepairWithCarDto>
 
 @{
-    ViewData["Title"] = "ShowByUsername";
+    ViewData["Title"] = "Wizyty użytkownika";
 }
 
-<h1>Show Repairs by Username</h1>
+<h1>Wizyty wybranego użytkownika</h1>
 
 <table class="table">
-    <thead>
+    @* <thead>
         <tr>
             <th>@Html.DisplayNameFor(model => model.First().CarId)</th>
             <th>@Html.DisplayNameFor(model => model.First().CarBrand)</th>
@@ -89,6 +89,18 @@
             <th>@Html.DisplayNameFor(model => model.First().ReservationDate)</th>
             <th>@Html.DisplayNameFor(model => model.First().Information)</th>
             <th>@Html.DisplayNameFor(model => model.First().Status)</th>
+            <th>Akcje</th>
+        </tr>
+    </thead> *@
+    <thead>
+        <tr>
+            <th>ID samochodu</th>
+            <th>Marka samochodu</th>
+            <th>Model </th>
+            <th>Mechanik</th>
+            <th>Data wizyty</th>
+            <th>Informacje do mechanika</th>
+            <th>Status</th>
             <th>Akcje</th>
         </tr>
     </thead>
@@ -105,7 +117,7 @@
                 <td>@Html.DisplayFor(modelItem => item.Status)</td>
                 <td>
                     @* <a asp-controller="Repair" asp-action="Edit" asp-route-id="@item.Id" class="btn btn-primary">Edytuj</a> *@
-                    @if (item.IsEditable && (User.IsInRole("Mechanic") || User.IsInRole("Administrator")))
+                    @if (User.IsInRole("Admin") || User.IsInRole("Mechanic"))
                     {
                         <a asp-controller="Repair" asp-action="Edit" asp-route-id="@item.Id" class="btn btn-primary">Edytuj</a>
                     }

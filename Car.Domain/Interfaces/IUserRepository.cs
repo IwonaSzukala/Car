@@ -15,6 +15,7 @@ namespace Car.Domain.Interfaces
         Task<Domain.Entities.ApplicationUser?> GetByName(string username);
         Task<Domain.Entities.ApplicationUser?> GetByEmail(string email);
         Task<Domain.Entities.ApplicationUser?> GetById(string id);
+        Task<IEnumerable<ApplicationUser?>> GetMechanics();
         Task<IEnumerable<Domain.Entities.ApplicationUser>> GetAll();
 
         Task Commit();

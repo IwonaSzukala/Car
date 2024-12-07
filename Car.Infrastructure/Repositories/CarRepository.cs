@@ -53,5 +53,8 @@ namespace Car.Infrastructure.Repositories
             _dbContext.Cars.Remove(car);
             await Commit();
         }
+
+        public async Task<IEnumerable<Domain.Entities.Car?>> GetCarsByUserId(string userId) 
+            => await _dbContext.Cars.Include(c => c.User).Where(c => c.UserId == userId).ToListAsync();
     }
 }

@@ -1,19 +1,19 @@
 ﻿@model IEnumerable<Car.Application.Car.RepairWithCarDto>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Moje wizyty";
 }
 
-<h1>Index</h1>
+<h1>Moje wizyty</h1>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a asp-action="Create">Umów wizytę</a>
 </p>
 
                     
                 
 <table class="table">
-    <thead>
+    @* <thead>
         <tr>
             <th>
                 @Html.DisplayNameFor(model => model.CarId)
@@ -38,6 +38,32 @@
             </th>
             <th></th>
         </tr>
+    </thead> *@
+    <thead>
+        <tr>
+            @* <th>
+                Numer samochodu
+            </th> *@
+            <th>
+                Marka samochodu
+            </th>
+            <th>
+                Model 
+            </th>
+            <th>
+                Mechanik
+            </th>
+            <th>
+                Data wizyty
+            </th>
+            <th>
+                Informacje do mechanika
+            </th>
+            <th>
+                Status
+            </th>
+            <th></th>
+        </tr>
     </thead>
     <tbody>
         @foreach (var item in Model)
@@ -45,9 +71,9 @@
             if (item.IsVisible)
             {
                 <tr>
-                    <td>
+                    @* <td>
                         @Html.DisplayFor(modelItem => item.CarId)
-                    </td>
+                    </td> *@
                     <td>
                         @Html.DisplayFor(modelItem => item.CarBrand)
                     </td>
@@ -58,7 +84,12 @@
                         @Html.DisplayFor(modelItem => item.MechanicId)
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.ReservationDate)
+                        @if (item.ReservationDate != DateTime.MinValue){
+                        @Html.DisplayFor(modelItem => item.ReservationDate);
+                        }
+                        else{
+                            <p>Nie przypisano</p>
+                        }
                     </td>
                     <td>
                         @Html.DisplayFor(modelItem => item.Information)
@@ -68,7 +99,7 @@
                     </td>
                     <td>
 
-                        @if (item.IsEditable && (User.IsInRole("Mechanic") || User.IsInRole("Administrator")))
+                        @if (item.IsEditable && (User.IsInRole("Mechanic") || User.IsInRole("Admin")))
                         {
                             <a asp-controller="Repair" asp-action="Edit" asp-route-id="@item.Id" class="btn btn-primary">Edytuj</a>
                         }

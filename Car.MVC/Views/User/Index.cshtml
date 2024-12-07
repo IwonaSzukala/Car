@@ -1,16 +1,16 @@
 ﻿@model IEnumerable<Car.Application.Car.UserDto>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Zarządzanie";
 }
 
-<h1>Index</h1>
+<h1>Zarządzanie</h1>
 
-<p>
+@* <p>
     <a asp-action="Create">Create New</a>
-</p>
+</p> *@
 <table class="table">
-    <thead>
+    @* <thead>
         <tr>
             <th>
                 @Html.DisplayNameFor(model => model.Username)
@@ -41,13 +41,27 @@
             </th>
             <th></th>
         </tr>
+    </thead> *@
+    <thead>
+        <tr>
+            @* <th>Nazwa użytkownika</th> *@
+            <th>Imię</th>
+            <th>Nazwisko</th>
+            <th>E-mail</th>
+            @* <th>Hasło</th> *@
+            <th>Numer telefonu</th>
+            <th>Ulica</th>
+            <th>Miasto</th>
+            <th>Kod pocztowy</th>
+            <th>Akcje</th>
+        </tr>
     </thead>
     <tbody>
 @foreach (var item in Model) {
         <tr>
-            <td>
+            @* <td>
                 @Html.DisplayFor(modelItem => item.Username)
-            </td>
+            </td> *@
             <td>
                 @Html.DisplayFor(modelItem => item.FirstName)
             </td>
@@ -57,9 +71,9 @@
             <td>
                 @Html.DisplayFor(modelItem => item.Email)
             </td>
-            <td>
+            @* <td>
                 @Html.DisplayFor(modelItem => item.Password)
-            </td>
+            </td> *@
             <td>
                 @Html.DisplayFor(modelItem => item.PhoneNumber)
             </td>
@@ -75,9 +89,8 @@
             <td>
                 <a class="btn btn-primary" asp-controller="User" asp-action="Details" asp-route-username="@item.Username">Lista samochodów użytkownika</a>
                     <a asp-controller="Repair" asp-action="ShowByUsername" asp-route-username="@item.Username" class="btn btn-primary">Pokaż Naprawy</a>
-                    <a asp-controller="User" asp-action="Edit" asp-route-id="@item.Id" class="btn btn-primary">Edytuj</a>
-                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+                    @* <a asp-controller="User" asp-action="Edit" asp-route-id="@item.Id" class="btn btn-primary">Edytuj</a> *@
+                
             </td>
         </tr>
 }

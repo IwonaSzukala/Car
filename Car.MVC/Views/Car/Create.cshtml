@@ -3,7 +3,7 @@
 @using System.Security.Claims;
 @model CreateCarCommand;
 
-<h1>Create Car</h1>
+<h1>Dodaj nowy samochód</h1>
 
 <hr />
 
@@ -16,25 +16,25 @@
 
 
             <div class="form-group mb-3">
-                <label class="control-label" asp-for="CarBrand">Car Brand</label>
+                <label class="control-label" asp-for="CarBrand">Marka samochodu</label>
                 <input class="form-control" type="text" id="CarBrand" asp-for="CarBrand" />
                 <span asp-validation-for="CarBrand" class="text-danger"></span>
             </div>
 
             <div class="form-group mb-3">
-                <label class="control-label" asp-for="CarModel">Car Model</label>
+                <label class="control-label" asp-for="CarModel">Model</label>
                 <input class="form-control" type="text" id="CarModel" asp-for="CarModel" />
                 <span asp-validation-for="CarModel" class="text-danger"></span>
             </div>
 
             <div class="form-group mb-3">
-                <label class="control-label" asp-for="ProductionYear">Production Year</label>
+                <label class="control-label" asp-for="ProductionYear">Rok produkcji</label>
                 <input class="form-control" type="text" id="ProductionYear" asp-for="ProductionYear" />
                 <span asp-validation-for="ProductionYear" class="text-danger"></span>
             </div>
 
             <div class="form-group mb-3">
-                <label class="control-label" asp-for="RegistrationNumber">Registration Number</label>
+                <label class="control-label" asp-for="RegistrationNumber">Numer rejestracyjny</label>
                 <input class="form-control" type="text" id="RegistrationNumber" asp-for="RegistrationNumber" />
                 <span asp-validation-for="RegistrationNumber" class="text-danger"></span>
             </div>
@@ -88,7 +88,7 @@
             
 
             <div class="form-group mb-3">
-                <input type="submit" value="Create" class="btn btn-primary" />
+                <input type="submit" value="Utwórz" class="btn btn-primary" />
             </div>
             
         </form>

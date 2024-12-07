@@ -17,7 +17,7 @@ namespace Car.Application.Car
         /*public ApplicationUser? User { get; set; } //doda³am to*/
 
 
-        public DateTime ReservationDate { get; set; } = DateTime.UtcNow;
+        public DateTime? ReservationDate { get; set; }
 
 
         public string? Information { get; set; }

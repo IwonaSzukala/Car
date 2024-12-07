@@ -12,7 +12,7 @@ namespace Car.Domain.Entities
         public int Id { get; set; }
         public int CarId { get; set; }
         public string MechanicId { get; set; }
-        public DateTime ReservationDate { get; set; } = DateTime.UtcNow;
+        public DateTime? ReservationDate { get; set; }
         public string Information { get; set; } = default!;
         public string Status { get; set; } = "Oczekiwanie";
 

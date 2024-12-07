@@ -8,10 +8,14 @@ using Car.Application.Car.Queries.GetAllCars;
 using Car.Application.Car.Queries.GetAllRepairs;
 using Car.Application.Car.Queries.GetById;
 using Car.Application.Car.Queries.GetByUsername;
+using Car.Application.Car.Queries.GetCarsByUserId;
+using Car.Application.Car.Queries.GetUserWithMechanicRole;
 using Car.Domain.Entities;
+using Car.MVC.Models;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
 
 namespace Car.MVC.Controllers
 
@@ -29,21 +33,26 @@ namespace Car.MVC.Controllers
         }
 
         [Authorize]
-        public IActionResult Create()
+        public async Task<IActionResult> Create()
         {
-            
-            return View();
+            var model = new CreateRepairViewModel
+            {
+                Cars = await (_mediator.Send(new GetCarsByUserIdQuery(User.FindFirstValue(System.Security.Claims.ClaimTypes.NameIdentifier)))),
+                Mechanics = await _mediator.Send(new GetUserWithMechanicRoleQuery()),
+                CreateRepairCommand = new CreateRepairCommand(),
+            };
+            return View(model);
         }
 
         [HttpPost]
         [Authorize]
-        public async Task<IActionResult> Create(CreateRepairCommand command)
+        public async Task<IActionResult> Create(CreateRepairViewModel model)
         {
             if (!ModelState.IsValid)
             {
-                return View(command);
+                return View(model);
             }
-            await _mediator.Send(command);
+            await _mediator.Send(model.CreateRepairCommand);
             return RedirectToAction(nameof(Create)); //todo
         }
 

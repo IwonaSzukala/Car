@@ -1,6 +1,7 @@
 using Car.Domain.Entities;
 using Car.Domain.Interfaces;
 using Car.Infrastructure.Persistence;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -46,5 +47,28 @@ namespace Car.Infrastructure.Repositories
 
         public Task Commit()
             => _dbContext.SaveChangesAsync();
+        public async Task<string> GetRoleIdByNameAsync(string roleName)
+        {
+            var role = await _dbContext.Set<IdentityRole>()
+                                     .Where(r => r.Name == roleName)
+                                     .FirstOrDefaultAsync();
+
+            return role?.Id;
+        }
+
+        public async Task<IEnumerable<ApplicationUser?>> GetMechanics()
+        {
+            var mechanicRoleId = await GetRoleIdByNameAsync("Mechanic");
+
+            // Pobierz u¿ytkowników, którzy maj¹ rolê "Mechanic"
+            var mechanics = await _dbContext.Set<IdentityUserRole<string>>()
+                .Where(ur => ur.RoleId == mechanicRoleId)
+                .Join(_dbContext.Set<ApplicationUser>(),
+                        ur => ur.UserId,
+                        user => user.Id,
+                        (ur, user) => user)
+                .ToListAsync();
+            return mechanics;
+        }
     }
 }

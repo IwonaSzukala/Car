@@ -46,16 +46,17 @@
 @model Car.Application.Car.Commands.EditCar.EditRepairCommand
 
 @{
-    ViewData["Title"] = "Edit";
+    ViewData["Title"] = "Zarządzanie wizytą";
 }
 
-<h1>Edytowanie naprawy samochodu</h1>
+<h1>Zarządzanie wizytą</h1>
 <hr />
 <div class="row">
     <div class="col-md-4">
         <form asp-action="Edit">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
+                <input asp-for="Id" class="form-control" type="hidden" value="@Model.Id"/>
             @*<div class="form-group">
                 <label asp-for="CarId" class="control-label"></label>
                 <input asp-for="CarId" class="form-control" readonly />
@@ -69,19 +70,19 @@
             </div>
 
             <div class="form-group">
-                <label asp-for="ReservationDate" class="control-label"></label>
+                <label asp-for="ReservationDate" class="control-label">Data wizyty</label>
                 <input asp-for="ReservationDate" type="datetime-local" class="form-control" />
                 <span asp-validation-for="ReservationDate" class="text-danger"></span>
             </div>
 
             <div class="form-group">
-                <label asp-for="Information" class="control-label"></label>
+                <label asp-for="Information" class="control-label">Informacja do mechanika</label>
                 <input asp-for="Information" class="form-control" />
                 <span asp-validation-for="Information" class="text-danger"></span>
             </div>
 
             <div class="form-group">
-                <label asp-for="Status" class="control-label"></label>
+                <label asp-for="Status" class="control-label">Status</label>
                 <select asp-for="Status" class="form-control">
                     <option value="Oczekiwanie">Oczekiwanie</option>
                     <option value="W trakcie">W trakcie</option>
@@ -98,5 +99,5 @@
 </div>
 
 <div>
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Index">Wróć do listy</a>
 </div>
