@@ -19,6 +19,7 @@
                 <span asp-validation-for="Id" class="text-danger"></span>
             </div>*@
             <div class="form-group">
+            <label asp-for="CreateRepairCommand.MechanicId" class="control-label">Wybierz mechanika</label>
             <select asp-for="CreateRepairCommand.MechanicId">
                     @foreach (var mechanic in Model.Mechanics)
                     {
@@ -29,6 +30,7 @@
             </select>
             </div>
             <div class="form-group">
+                <label asp-for="CreateRepairCommand.CarId" class="control-label">Wybierz pojazd</label>
                 <select asp-for="CreateRepairCommand.CarId">
                     @foreach (var car in Model.Cars)
                     {

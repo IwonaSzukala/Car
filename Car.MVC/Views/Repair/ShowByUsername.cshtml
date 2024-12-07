@@ -112,7 +112,17 @@
                 <td>@Html.DisplayFor(modelItem => item.CarBrand)</td>
                 <td>@Html.DisplayFor(modelItem => item.CarModel)</td>
                 <td>@Html.DisplayFor(modelItem => item.MechanicId)</td>
-                <td>@Html.DisplayFor(modelItem => item.ReservationDate)</td>
+                <td>
+                    @if (item.ReservationDate != DateTime.MinValue)
+                    {
+                        @Html.DisplayFor(modelItem => item.ReservationDate)
+                        ;
+                    }
+                    else
+                    {
+                        <p>Nie przypisano</p>
+                    }
+                </td>
                 <td>@Html.DisplayFor(modelItem => item.Information)</td>
                 <td>@Html.DisplayFor(modelItem => item.Status)</td>
                 <td>
