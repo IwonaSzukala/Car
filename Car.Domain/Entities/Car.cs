@@ -17,7 +17,10 @@ namespace Car.Domain.Entities
         public string VIN { get; set; } = default!;
 
         public string? CreatedById { get; set; }
-        public ApplicationUser? CreatedBy { get; set; } //zamieniłam IdentityUser
+        public ApplicationUser? CreatedBy { get; set; } //zamieniłam
+                                                        //
+
+
 
 
         // Relacja z User

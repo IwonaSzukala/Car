@@ -1,7 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace Car.MVC.Areas.IdentityPages
+namespace Car.MVC.Areas.Identity.Pages
 {
     public class _ViewStartModel : PageModel
     {

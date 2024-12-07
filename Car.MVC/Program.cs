@@ -6,6 +6,7 @@ using Car.Application.Car;
 using FluentValidation;
 using Car.Application.Car.Commands.CreateUser;
 using Car.Application.Car.Commands.EditUser;
+using Microsoft.AspNetCore.Identity;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -17,6 +18,7 @@ builder.Services.AddValidatorsFromAssemblyContaining<EditUserCommandValidator>()
 
 builder.Services.AddInfrastructure(builder.Configuration);
 builder.Services.AddApplication();
+builder.Services.AddRazorPages();
 
 
 
