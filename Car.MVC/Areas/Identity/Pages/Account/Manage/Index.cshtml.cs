@@ -30,6 +30,7 @@ namespace Car.MVC.Areas.Identity.Pages.Account.Manage
         ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
         ///     directly from your code. This API may change or be removed in future releases.
         /// </summary>
+        [Display(Name = "E-mail")]
         public string Username { get; set; }
 
         /// <summary>
@@ -56,13 +57,15 @@ namespace Car.MVC.Areas.Identity.Pages.Account.Manage
             ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
             ///     directly from your code. This API may change or be removed in future releases.
             /// </summary>
-            [Phone]
-            [Display(Name = "Phone number")]
+            [Phone(ErrorMessage = "Nieprawidłowy format numeru telefonu.")]
+            [Display(Name = "Numer telefonu")]
             public string PhoneNumber { get; set; }
 
+            [StringLength(50, ErrorMessage = "Imię nie może przekraczać 50 znaków.")]
             [Display(Name = "Imię")]
             public string FirstName { get; set; }
 
+            [StringLength(50, ErrorMessage = "Nazwisko nie może przekraczać 50 znaków.")]
             [Display(Name = "Nazwisko")]
             public string LastName { get; set; }
 
@@ -72,6 +75,7 @@ namespace Car.MVC.Areas.Identity.Pages.Account.Manage
             [Display(Name = "Miejscowość")]
             public string City { get; set; }
 
+            [RegularExpression(@"^\d{2}(-\d{3})?$", ErrorMessage = "Nieprawidłowy format kodu pocztowego.")]
             [Display(Name = "Kod pocztowy")]
             public string PostalCode { get; set; }
         }
@@ -153,7 +157,7 @@ namespace Car.MVC.Areas.Identity.Pages.Account.Manage
             await _userManager.UpdateAsync(user);
 
             await _signInManager.RefreshSignInAsync(user);
-            StatusMessage = "Your profile has been updated";
+            StatusMessage = "Twój profil został pomyślnie zaktualizowany.";
             return RedirectToPage();
         }
     }

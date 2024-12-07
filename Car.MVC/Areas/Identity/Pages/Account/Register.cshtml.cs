@@ -1,6 +1,4 @@
-﻿// Licensed to the .NET Foundation under one or more agreements.
-// The .NET Foundation licenses this file to you under the MIT license.
-#nullable disable
+﻿#nullable disable
 
 using System;
 using System.Collections.Generic;
@@ -76,26 +74,31 @@ namespace Car.MVC.Areas.Identity.Pages.Account
             ///     directly from your code. This API may change or be removed in future releases.
             /// </summary>
             /// 
-            [Required]
+            [Required(ErrorMessage = "Imię jest wymagane.")]
+            [StringLength(50, ErrorMessage = "Imię nie może przekraczać 50 znaków.")]
+            [Display(Name = "Imię")]
             public string FirstName { get; set; }
 
-            [Required]
+            [Required(ErrorMessage = "Nazwisko jest wymagane.")]
+            [StringLength(50, ErrorMessage = "Nazwisko nie może przekraczać 50 znaków.")]
             public string LastName { get; set; }
 
-            [Required]
-            [Phone]
+            [Required(ErrorMessage = "Numer telefonu jest wymagany.")]
+            [Phone(ErrorMessage = "Nieprawidłowy format numeru telefonu.")]
             public string PhoneNumber { get; set; }
 
-            [Required]
+            [Required(ErrorMessage = "Ulica jest wymagana.")]
             public string Street { get; set; }
 
-            [Required]
+            [Required(ErrorMessage = "Miejscowość jest wymagana.")]
             public string City { get; set; }
 
-            [Required]
+            [Required(ErrorMessage = "Kod pocztowy jest wymagany.")]
+            [RegularExpression(@"^\d{2}(-\d{3})?$", ErrorMessage = "Nieprawidłowy format kodu pocztowego.")]
             public string PostalCode { get; set; }
-            [Required]
-            [EmailAddress]
+
+            [Required(ErrorMessage = "Adres e-mail jest wymagany.")]
+            [EmailAddress(ErrorMessage = "Nieprawidłowy adres e-mail.")]
             [Display(Name = "Email")]
             public string Email { get; set; }
 
@@ -103,19 +106,18 @@ namespace Car.MVC.Areas.Identity.Pages.Account
             ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
             ///     directly from your code. This API may change or be removed in future releases.
             /// </summary>
-            [Required]
-            [StringLength(100, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 6)]
+            [Required(ErrorMessage = "Hasło jest wymagane.")]
+            [StringLength(100, ErrorMessage = "Hasło musi mieć co najmniej {2} i maksymalnie {1} znaków.", MinimumLength = 6)]
             [DataType(DataType.Password)]
-            [Display(Name = "Password")]
             public string Password { get; set; }
 
             /// <summary>
             ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
             ///     directly from your code. This API may change or be removed in future releases.
             /// </summary>
+            [Required(ErrorMessage = "Potwierdzenie hasła jest wymagane.")]
             [DataType(DataType.Password)]
-            [Display(Name = "Confirm password")]
-            [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
+            [Compare("Password", ErrorMessage = "Hasła nie są zgodne.")]
             public string ConfirmPassword { get; set; }
         }
 

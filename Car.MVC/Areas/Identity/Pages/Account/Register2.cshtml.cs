@@ -1,4 +1,4 @@
-using Azure.Core;
+/*using Azure.Core;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Identity;
@@ -13,7 +13,7 @@ using Car.Domain.Entities;
 
 namespace Car.MVC.Areas.Identity.Pages.Account { 
 
-/*public class RegisterModel : PageModel
+*//*public class RegisterModel : PageModel
 {
     private readonly SignInManager<ApplicationUser> _signInManager;
     private readonly UserManager<ApplicationUser> _userManager;
@@ -168,7 +168,7 @@ namespace Car.MVC.Areas.Identity.Pages.Account {
         }
         return (IUserEmailStore<ApplicationUser>)_userStore;
     }
-}*/
+}*//*
     public class Register2Model : PageModel
     {
         private readonly SignInManager<ApplicationUser> _signInManager;
@@ -326,3 +326,4 @@ namespace Car.MVC.Areas.Identity.Pages.Account {
         }
     }
 }
+*/

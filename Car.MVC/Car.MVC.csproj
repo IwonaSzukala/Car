@@ -28,8 +28,4 @@
     <ProjectReference Include="..\Car.Infrastructure\Car.Infrastructure.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Areas\Identity\Data\" />
-  </ItemGroup>
-
 </Project>
