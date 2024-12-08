@@ -4,65 +4,25 @@
     ViewData["Title"] = "Moje wizyty";
 }
 
-<h1>Moje wizyty</h1>
+<h1 class="text-center my-4">Wizyty</h1>
 
-<p>
-    <a asp-action="Create">Umów wizytę</a>
-</p>
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <a asp-action="Create" class="btn btn-primary">Umów nową wizytę</a>
+</div>
 
-                    
-                
-<table class="table">
-    @* <thead>
+<table class="table table-striped table-hover">
+    <thead class="table-dark">
         <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.CarId)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.CarBrand)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.CarModel)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.MechanicId)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ReservationDate)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Information)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Status)
-            </th>
-            <th></th>
-        </tr>
-    </thead> *@
-    <thead>
-        <tr>
-            @* <th>
-                Numer samochodu
-            </th> *@
-            <th>
-                Marka samochodu
-            </th>
-            <th>
-                Model 
-            </th>
-            <th>
-                Mechanik
-            </th>
-            <th>
-                Data wizyty
-            </th>
-            <th>
-                Informacje do mechanika
-            </th>
-            <th>
-                Status
-            </th>
-            <th></th>
+            <th>Marka samochodu</th>
+            <th>Model</th>
+            <th>Mechanik</th>
+            <th>Data wizyty</th>
+            <th>Informacje</th>
+            <th>Status</th>
+            @if (User.IsInRole("Mechanic") || User.IsInRole("Admin"))
+                        {
+                            <th>Akcje</th>
+                        }
         </tr>
     </thead>
     <tbody>
@@ -71,44 +31,52 @@
             if (item.IsVisible)
             {
                 <tr>
-                    @* <td>
-                        @Html.DisplayFor(modelItem => item.CarId)
-                    </td> *@
+                    <td>@Html.DisplayFor(modelItem => item.CarBrand)</td>
+                    <td>@Html.DisplayFor(modelItem => item.CarModel)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Mechanic.FirstName) @Html.DisplayFor(modelItem => item.Mechanic.LastName)</td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.CarBrand)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.CarModel)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.MechanicId)
-                    </td>
-                    <td>
-                        @if (item.ReservationDate != DateTime.MinValue){
-                        @Html.DisplayFor(modelItem => item.ReservationDate);
+                        @if (item.ReservationDate != DateTime.MinValue)
+                        {
+                            @item.ReservationDate.ToString("dd-MM-yyyy HH:mm")
                         }
-                        else{
-                            <p>Nie przypisano</p>
+                        else
+                        {
+                            <span class="text-muted">Nie przypisano</span>
                         }
                     </td>
+                    <td>@Html.DisplayFor(modelItem => item.Information)</td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.Information)
+                        <span class="badge @GetStatusBadgeClass(item.Status)">
+                            @Html.DisplayFor(modelItem => item.Status)
+                        </span>
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.Status)
-                    </td>
-                    <td>
-
                         @if (item.IsEditable && (User.IsInRole("Mechanic") || User.IsInRole("Admin")))
                         {
-                            <a asp-controller="Repair" asp-action="Edit" asp-route-id="@item.Id" class="btn btn-primary">Edytuj</a>
+                            <a asp-controller="Repair" asp-action="Edit" asp-route-id="@item.Id" class="btn btn-primary btn-sm me-1">Edytuj</a>
                         }
-                        
-                        @* @Html.ActionLink("Details", "Details", new { id = item.Id }) |
-                        @Html.ActionLink("Delete", "Delete", new { id = item.Id }) *@
                     </td>
                 </tr>
             }
         }
     </tbody>
 </table>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
+
+@functions {
+    private string GetStatusBadgeClass(string status)
+    {
+        return status switch
+        {
+            "Zakończona" => "bg-success",
+            "W toku" => "bg-warning text-dark",
+            "Oczekująca" => "bg-info text-dark",
+            _ => "bg-secondary text-dark",
+        };
+    }
+}

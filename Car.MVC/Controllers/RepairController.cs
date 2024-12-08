@@ -53,7 +53,7 @@ namespace Car.MVC.Controllers
                 return View(model);
             }
             await _mediator.Send(model.CreateRepairCommand);
-            return RedirectToAction(nameof(Create)); //todo
+            return RedirectToAction(nameof(Index)); //todo
         }
 
         [HttpPost]

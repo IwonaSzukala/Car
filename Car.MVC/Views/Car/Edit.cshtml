@@ -4,53 +4,51 @@
     ViewData["Title"] = "Edytuj samochód";
 }
 
-<h1>Edytowanie samochodu @Model.CarBrand @Model.CarModel</h1>
-
+<h1 class="text-center my-4">Edytowanie samochodu @Model.CarBrand @Model.CarModel</h1>
 
 <hr />
-<div class="row">
-    <div class="col-md-4">
+<div class="row justify-content-center">
+    <div class="col-md-6">
         <form asp-action="Edit">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            @*<div class="form-group">
-                <label asp-for="UserId" class="control-label"></label>
-                <input asp-for="UserId" class="form-control" />
-                <span asp-validation-for="UserId" class="text-danger"></span>
-            </div>*@
-            <div class="form-group">
-                <label asp-for="CarBrand" class="control-label"></label>
-                <input asp-for="CarBrand" class="form-control" />
+            <div asp-validation-summary="ModelOnly" class="text-danger mb-4"></div>
+
+            <div class="form-group mb-3">
+                <label asp-for="CarBrand" class="form-label">Marka samochodu</label>
+                <input asp-for="CarBrand" class="form-control" placeholder="Wprowadź markę samochodu" />
                 <span asp-validation-for="CarBrand" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="CarModel" class="control-label"></label>
-                <input asp-for="CarModel" class="form-control" />
+
+            <div class="form-group mb-3">
+                <label asp-for="CarModel" class="form-label">Model samochodu</label>
+                <input asp-for="CarModel" class="form-control" placeholder="Wprowadź model samochodu" />
                 <span asp-validation-for="CarModel" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="ProductionYear" class="control-label"></label>
-                <input asp-for="ProductionYear" class="form-control" />
+
+            <div class="form-group mb-3">
+                <label asp-for="ProductionYear" class="form-label">Rok produkcji</label>
+                <input asp-for="ProductionYear" class="form-control" placeholder="Wprowadź rok produkcji" />
                 <span asp-validation-for="ProductionYear" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="RegistrationNumber" class="control-label"></label>
-                <input asp-for="RegistrationNumber" class="form-control" />
+
+            <div class="form-group mb-3">
+                <label asp-for="RegistrationNumber" class="form-label">Numer rejestracyjny</label>
+                <input asp-for="RegistrationNumber" class="form-control" placeholder="Wprowadź numer rejestracyjny" />
                 <span asp-validation-for="RegistrationNumber" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="VIN" class="control-label"></label>
-                <input asp-for="VIN" class="form-control" />
+
+            <div class="form-group mb-3">
+                <label asp-for="VIN" class="form-label">Numer VIN</label>
+                <input asp-for="VIN" class="form-control" placeholder="Wprowadź numer VIN" />
                 <span asp-validation-for="VIN" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
+
+            <div class="form-group mb-4">
+                <input type="submit" value="Zapisz zmiany" class="btn btn-primary w-100" />
             </div>
         </form>
     </div>
 </div>
 
-<div>
-
-    <a asp-action="Index">Back to List</a>
+<div class="text-center mt-4">
+    <a asp-action="Index" class="btn btn-secondary">Powrót do listy</a>
 </div>
-

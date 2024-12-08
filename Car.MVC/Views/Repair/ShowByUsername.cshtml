@@ -1,138 +1,89 @@
-﻿@*@model IEnumerable<Car.Application.Car.RepairWithCarDto>
-
-@{
-    ViewData["Title"] = "ShowByUsername";
-}
-
-<h1>ShowByUsername</h1>
-
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.CarId)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.CarBrand)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.CarModel)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.MechanicId)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ReservationDate)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Information)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Status)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.CarId)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CarBrand)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CarModel)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.MechanicId)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ReservationDate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Information)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Status)
-            </td>
-            <td>
-                <a asp-controller="Repair" asp-action="Edit" asp-route-id="@Model.id" class="btn btn-primary">Edytuj</a>
-                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
-*@
-
-@model IEnumerable<Car.Application.Car.RepairWithCarDto>
+﻿@model IEnumerable<Car.Application.Car.RepairWithCarDto>
 
 @{
     ViewData["Title"] = "Wizyty użytkownika";
 }
 
-<h1>Wizyty wybranego użytkownika</h1>
+<h1 class="text-center my-4">Wizyty wybranego użytkownika</h1>
 
-<table class="table">
-    @* <thead>
+@* <div class="d-flex justify-content-between align-items-center mb-4">
+    <a asp-action="Create" class="btn btn-primary">Dodaj nową wizytę</a>
+</div> *@
+
+<table class="table table-striped table-hover">
+    <thead class="table-dark">
         <tr>
-            <th>@Html.DisplayNameFor(model => model.First().CarId)</th>
-            <th>@Html.DisplayNameFor(model => model.First().CarBrand)</th>
-            <th>@Html.DisplayNameFor(model => model.First().CarModel)</th>
-            <th>@Html.DisplayNameFor(model => model.First().MechanicId)</th>
-            <th>@Html.DisplayNameFor(model => model.First().ReservationDate)</th>
-            <th>@Html.DisplayNameFor(model => model.First().Information)</th>
-            <th>@Html.DisplayNameFor(model => model.First().Status)</th>
-            <th>Akcje</th>
-        </tr>
-    </thead> *@
-    <thead>
-        <tr>
-            <th>ID samochodu</th>
             <th>Marka samochodu</th>
-            <th>Model </th>
+            <th>Model</th>
             <th>Mechanik</th>
             <th>Data wizyty</th>
-            <th>Informacje do mechanika</th>
+            <th>Informacje</th>
             <th>Status</th>
-            <th>Akcje</th>
+            @if (User.IsInRole("Mechanic") || User.IsInRole("Admin"))
+            {
+                <th>Akcje</th>
+            }
         </tr>
     </thead>
     <tbody>
         @foreach (var item in Model)
         {
-            <tr>
-                <td>@Html.DisplayFor(modelItem => item.CarId)</td>
-                <td>@Html.DisplayFor(modelItem => item.CarBrand)</td>
-                <td>@Html.DisplayFor(modelItem => item.CarModel)</td>
-                <td>@Html.DisplayFor(modelItem => item.MechanicId)</td>
-                <td>
-                    @if (item.ReservationDate != DateTime.MinValue)
-                    {
-                        @Html.DisplayFor(modelItem => item.ReservationDate)
-                        ;
-                    }
-                    else
-                    {
-                        <p>Nie przypisano</p>
-                    }
-                </td>
-                <td>@Html.DisplayFor(modelItem => item.Information)</td>
-                <td>@Html.DisplayFor(modelItem => item.Status)</td>
-                <td>
-                    @* <a asp-controller="Repair" asp-action="Edit" asp-route-id="@item.Id" class="btn btn-primary">Edytuj</a> *@
+            if (item.IsVisible)
+            {
+                <tr>
+                    <td>@Html.DisplayFor(modelItem => item.CarBrand)</td>
+                    <td>@Html.DisplayFor(modelItem => item.CarModel)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Mechanic.FirstName) @Html.DisplayFor(modelItem => item.Mechanic.LastName)</td>
+                    <td>
+                        @if (item.ReservationDate != DateTime.MinValue)
+                        {
+                            @item.ReservationDate.ToString("dd-MM-yyyy HH:mm")
+                        }
+                        else
+                        {
+                            <span class="text-muted">Nie przypisano</span>
+                        }
+                    </td>
+                    <td>@Html.DisplayFor(modelItem => item.Information)</td>
+                    <td>
+                        <span class="badge @GetStatusBadgeClass(item.Status)">
+                            @Html.DisplayFor(modelItem => item.Status)
+                        </span>
+                    </td>
                     @if (User.IsInRole("Admin") || User.IsInRole("Mechanic"))
                     {
-                        <a asp-controller="Repair" asp-action="Edit" asp-route-id="@item.Id" class="btn btn-primary">Edytuj</a>
+                        <td>
+                            @if (item.IsEditable)
+                            {
+                                <a asp-controller="Repair" asp-action="Edit" asp-route-id="@item.Id" class="btn btn-primary btn-sm me-1">Edytuj</a>
+                            }
+                            @if (User.IsInRole("Admin"))
+                            {
+                                <a asp-controller="Repair" asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger btn-sm">Usuń</a>
+                            }
+                        </td>
                     }
-                </td>
-            </tr>
+                </tr>
+            }
         }
     </tbody>
 </table>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
+
+@functions {
+    private string GetStatusBadgeClass(string status)
+    {
+        return status switch
+        {
+            "Zakończona" => "bg-success",
+            "W toku" => "bg-warning text-dark",
+            "Oczekująca" => "bg-info text-dark",
+            _ => "bg-secondary text-dark",
+        };
+    }
+}

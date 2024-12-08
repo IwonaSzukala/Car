@@ -29,7 +29,7 @@ namespace Car.Infrastructure.Repositories
         }
 
         public async Task<IEnumerable<Repair>> GetAllWithCars()
-            => await _dbContext.Repairs.Include(r => r.Car).ToListAsync();
+            => await _dbContext.Repairs.Include(r => r.Car).Include(r => r.Mechanic).ToListAsync();
 
         public async Task<IEnumerable<Repair>> GetByUsername(string username)
         {

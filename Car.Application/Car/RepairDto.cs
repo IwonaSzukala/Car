@@ -14,7 +14,7 @@ namespace Car.Application.Car
         public int Id { get; set; }
         public int? CarId { get; set; }
         public string MechanicId { get; set; }
-        /*public ApplicationUser? User { get; set; } //doda³am to*/
+        public ApplicationUser? Mechanic { get; set; } //doda³am to*/
 
 
         public DateTime? ReservationDate { get; set; }

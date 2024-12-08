@@ -1,97 +1,54 @@
 ﻿@using Car.Application.Car;
-@using Car.Application.Car.Commands.CreateCar
+@using Car.Application.Car.Commands.CreateCar;
 @using System.Security.Claims;
 @model CreateCarCommand;
 
-<h1>Dodaj nowy samochód</h1>
 
-<hr />
+<div class="row justify-content-center">
+    <div class="col-md-6 col-lg-5">
+        <div class="card shadow-sm mt-3">
+            <div class="card-body">
+                <h2 class="card-title text-center mb-4">Dodaj nowy pojazd</h2>
+                <form action="/Car/Create" method="post">
+                    <!-- Ukryte pole z UserId -->
+                    <input type="hidden" id="UserId" asp-for="UserId" value="@User.FindFirstValue(ClaimTypes.NameIdentifier)" />
 
-<div class="row">
-    <div class="col-md4">
-        <form action="/Car/Create" method="post">
+                    <div class="form-floating mb-3">
+                        <input class="form-control" type="text" id="CarBrand" asp-for="CarBrand" placeholder="Marka samochodu" />
+                        <label for="CarBrand">Marka samochodu</label>
+                        <span asp-validation-for="CarBrand" class="text-danger"></span>
+                    </div>
 
-                <input class="form-control" type="hidden" id="UserId" asp-for="UserId" value="@User.FindFirstValue(ClaimTypes.NameIdentifier)"/>
+                    <div class="form-floating mb-3">
+                        <input class="form-control" type="text" id="CarModel" asp-for="CarModel" placeholder="Model" />
+                        <label for="CarModel">Model</label>
+                        <span asp-validation-for="CarModel" class="text-danger"></span>
+                    </div>
 
+                    <div class="form-floating mb-3">
+                        <input class="form-control" type="text" id="ProductionYear" asp-for="ProductionYear" placeholder="Rok produkcji" />
+                        <label for="ProductionYear">Rok produkcji</label>
+                        <span asp-validation-for="ProductionYear" class="text-danger"></span>
+                    </div>
 
+                    <div class="form-floating mb-3">
+                        <input class="form-control" type="text" id="RegistrationNumber" asp-for="RegistrationNumber" placeholder="Numer rejestracyjny" />
+                        <label for="RegistrationNumber">Numer rejestracyjny</label>
+                        <span asp-validation-for="RegistrationNumber" class="text-danger"></span>
+                    </div>
 
-            <div class="form-group mb-3">
-                <label class="control-label" asp-for="CarBrand">Marka samochodu</label>
-                <input class="form-control" type="text" id="CarBrand" asp-for="CarBrand" />
-                <span asp-validation-for="CarBrand" class="text-danger"></span>
+                    <div class="form-floating mb-3">
+                        <input class="form-control" type="text" id="VIN" asp-for="VIN" placeholder="VIN" />
+                        <label for="VIN">VIN</label>
+                        <span asp-validation-for="VIN" class="text-danger"></span>
+                    </div>
+
+                    <div class="d-grid">
+                        <input type="submit" value="Utwórz" class="btn btn-primary btn-lg" />
+                    </div>
+                </form>
             </div>
-
-            <div class="form-group mb-3">
-                <label class="control-label" asp-for="CarModel">Model</label>
-                <input class="form-control" type="text" id="CarModel" asp-for="CarModel" />
-                <span asp-validation-for="CarModel" class="text-danger"></span>
-            </div>
-
-            <div class="form-group mb-3">
-                <label class="control-label" asp-for="ProductionYear">Rok produkcji</label>
-                <input class="form-control" type="text" id="ProductionYear" asp-for="ProductionYear" />
-                <span asp-validation-for="ProductionYear" class="text-danger"></span>
-            </div>
-
-            <div class="form-group mb-3">
-                <label class="control-label" asp-for="RegistrationNumber">Numer rejestracyjny</label>
-                <input class="form-control" type="text" id="RegistrationNumber" asp-for="RegistrationNumber" />
-                <span asp-validation-for="RegistrationNumber" class="text-danger"></span>
-            </div>
-
-            <div class="form-group mb-3">
-                <label class="control-label" asp-for="VIN">VIN</label>
-                <input class="form-control" type="text" id="VIN" asp-for="VIN" />
-                <span asp-validation-for="VIN" class="text-danger"></span>
-            </div>
-
-            @*<div class="form-group mb-3">
-                <label class="control-label" for="FirstName">First Name</label>
-                <input class="form-control" type="text" id="FirstName" name="User.FirstName" />
-            </div>
-
-            <div class="form-group mb-3">
-                <label class="control-label" for="LastName">Last Name</label>
-                <input class="form-control" type="text" id="LastName" name="User.LastName" />
-            </div>
-
-            <div class="form-group mb-3">
-                <label class="control-label" for="Email">E-mail</label>
-                <input class="form-control" type="email" id="Email" name="User.Email" />
-            </div>
-
-            <div class="form-group mb-3">
-                <label class="control-label" for="Password">Password</label>
-                <input class="form-control" type="password" id="Password" name="User.Password" />
-            </div>
-
-            <div class="form-group mb-3">
-                <label class="control-label" for="PhoneNumber">Phone Number</label>
-                <input class="form-control" type="tel" id="PhoneNumber" name="UserContactDetails.PhoneNumber" />
-            </div>
-
-            <div class="form-group mb-3">
-                <label class="control-label" for="Street">Street</label>
-                <input class="form-control" type="text" id="Street" name="UserContactDetails.Street" />
-            </div>
-
-            <div class="form-group mb-3">
-                <label class="control-label" for="City">City</label>
-                <input class="form-control" type="text" id="City" name="UserContactDetails.City" />
-            </div>
-
-            <div class="form-group mb-3">
-                <label class="control-label" for="PostalCode">Postal Code</label>
-                <input class="form-control" type="text" id="PostalCode" name="UserContactDetails.PostalCode" />
-            </div>*@
-
-            
-
-            <div class="form-group mb-3">
-                <input type="submit" value="Utwórz" class="btn btn-primary" />
-            </div>
-            
-        </form>
+        </div>
     </div>
 </div>
 

@@ -4,95 +4,49 @@
     ViewData["Title"] = "Moje pojazdy";
 }
 
-<h1>Moje pojazdy</h1>
+<h1 class="text-center my-4">Moje pojazdy</h1>
 
-<p>
-    <a asp-action="Create" class="btn btn-secondary">Dodaj nowy pojazd</a>
+<p class="text-center">
+    <a asp-action="Create" class="btn btn-primary btn-sl">Dodaj nowy pojazd</a>
 </p>
-@* <table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.UserId)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.CarBrand)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.CarModel)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ProductionYear)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.RegistrationNumber)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.VIN)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody> *@
 
-<div class="row">
-    @foreach (var item in Model)
-
+<div class="row justify-content-center">
+    @if (!Model.Any())
     {
-    @if(item.IsVisible)
-    {
-    
-    
-        <div class="card m-3" style="width: 18rem;">
-                <div class="card-body">
-                    <h4 class="card-title">@item.CarBrand</h4>
-                    <h5 class="card-subtitle mb-2 text-muted">@item.CarModel</h5>
-                <p class="card-text"><b>Rok produkcji:</b> @item.ProductionYear</p>
-                <p class="card-text"><b>Numer rejestracyjny:</b> @item.RegistrationNumber</p>
-                <p class="card-text"><b>VIN:</b> @item.VIN</p>
-            
-                @*@if(item.IsEditable)
-                {
-                    <a asp-controller="Car" asp-action="Edit" asp-route-id="@item.Id" class="btn btn-primary">Edytuj</a>
-                }*@
-                    @* <a asp-controller="Car" asp-action="Edit" asp-route-id="@item.Id" class="btn btn-primary">Edytuj</a>
-                <a href="#" class="btn btn-danger">Usuń</a> *@
-                <form asp-controller="Car" asp-action="Delete" asp-route-id="@item.Id" method="post" style="display:inline;">
-                        <button type="submit" class="btn btn-danger">Usuń</button>
-                    </form>
-                </div>
+        <div class="alert alert-warning text-center" role="alert">
+            Brak pojazdów do wyświetlenia. Dodaj nowy pojazd, klikając powyższy przycisk.
         </div>
-       }
-
-
-        @* <tr>
-    <td>
-    @Html.DisplayFor(modelItem => item.UserId)
-    </td>
-    <td>
-    @Html.DisplayFor(modelItem => item.CarBrand)
-    </td>
-    <td>
-    @Html.DisplayFor(modelItem => item.CarModel)
-    </td>
-    <td>
-    @Html.DisplayFor(modelItem => item.ProductionYear)
-    </td>
-    <td>
-    @Html.DisplayFor(modelItem => item.RegistrationNumber)
-    </td>
-    <td>
-    @Html.DisplayFor(modelItem => item.VIN)
-    </td>
-    <td>
-    @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-    @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-    @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
-    </td>
-    </tr> *@
     }
-
+    else
+    {
+        @foreach (var item in Model)
+        {
+            @if (item.IsVisible)
+            {
+                <div class="col-md-4 d-flex align-items-stretch">
+                    <div class="card shadow-sm m-3">
+                        <div class="card-body">
+                            <h4 class="card-title">@item.CarBrand</h4>
+                            <h5 class="card-subtitle mb-2 text-muted">@item.CarModel</h5>
+                            <ul class="list-unstyled">
+                                <li><b>Rok produkcji:</b> @item.ProductionYear</li>
+                                <li><b>Numer rejestracyjny:</b> @item.RegistrationNumber</li>
+                                <li><b>VIN:</b> @item.VIN</li>
+                            </ul>
+                            <div class="d-flex justify-content-between mt-3">
+                                @* Dodaj przycisk edycji, jeśli jest edytowalny *@
+                                @* @if (item.IsEditable)
+                                {
+                                    <a asp-controller="Car" asp-action="Edit" asp-route-id="@item.Id" class="btn btn-primary btn-sm">Edytuj</a>
+                                } *@
+                                <form asp-controller="Car" asp-action="Delete" asp-route-id="@item.Id" method="post" style="display:inline;">
+                                    <button type="submit" class="btn btn-danger btn-sm">Usuń</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        }
+    }
 </div>
-
-    @* </tbody>
-</table> *@

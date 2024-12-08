@@ -1,47 +1,4 @@
-﻿@*@model Car.Application.Car.Commands.EditCar.EditRepairCommand
-
-@{
-    ViewData["Title"] = "Edit";
-}
-
-
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Edit">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="CarId" class="control-label"></label>
-                <input asp-for="CarId" class="form-control" />
-                <span asp-validation-for="CarId" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="MechanicId" class="control-label"></label>
-                <input asp-for="MechanicId" class="form-control" />
-                <span asp-validation-for="MechanicId" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="ReservationDate" class="control-label"></label>
-                <input asp-for="ReservationDate" class="form-control" />
-                <span asp-validation-for="ReservationDate" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Information" class="control-label"></label>
-                <input asp-for="Information" class="form-control" />
-                <span asp-validation-for="Information" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
-            </div>
-        </form>
-    </div>
-</div>
-
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
-
-*@
+﻿
 
 @model Car.Application.Car.Commands.EditCar.EditRepairCommand
 
@@ -49,55 +6,56 @@
     ViewData["Title"] = "Zarządzanie wizytą";
 }
 
-<h1>Zarządzanie wizytą</h1>
+<h1 class="text-center text-primary my-4">Zarządzanie wizytą</h1>
 <hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Edit">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+<div class="row justify-content-center">
+    <div class="col-lg-6 col-md-8">
+        <form asp-action="Edit" class="p-4 border rounded bg-white shadow">
+            <div asp-validation-summary="ModelOnly" class="alert alert-danger" role="alert"></div>
 
-                <input asp-for="Id" class="form-control" type="hidden" value="@Model.Id"/>
-            @*<div class="form-group">
-                <label asp-for="CarId" class="control-label"></label>
-                <input asp-for="CarId" class="form-control" readonly />
-                <span asp-validation-for="CarId" class="text-danger"></span>
-            </div>*@
+            <!-- Hidden field for Id -->
+            <input asp-for="Id" type="hidden" value="@Model.Id" />
 
-            <div class="form-group">
-                <label asp-for="MechanicId" class="control-label"></label>
-                <input asp-for="MechanicId" class="form-control" />
-                <span asp-validation-for="MechanicId" class="text-danger"></span>
-            </div>
+            <!-- MechanicId -->
+            <input asp-for="MechanicId" type="hidden" value="@Model.MechanicId" />
+            
 
-            <div class="form-group">
-                <label asp-for="ReservationDate" class="control-label">Data wizyty</label>
+            <!-- Reservation Date -->
+            <div class="form-group mb-3">
+                <label asp-for="ReservationDate" class="form-label fw-bold">Data wizyty</label>
                 <input asp-for="ReservationDate" type="datetime-local" class="form-control" />
                 <span asp-validation-for="ReservationDate" class="text-danger"></span>
             </div>
 
-            <div class="form-group">
-                <label asp-for="Information" class="control-label">Informacja do mechanika</label>
-                <input asp-for="Information" class="form-control" />
+            <!-- Information -->
+            <div class="form-group mb-3">
+                <label asp-for="Information" class="form-label fw-bold">Informacja dla mechanika</label>
+                <textarea asp-for="Information" class="form-control" rows="3" placeholder="Wprowadź dodatkowe informacje"></textarea>
                 <span asp-validation-for="Information" class="text-danger"></span>
             </div>
 
-            <div class="form-group">
-                <label asp-for="Status" class="control-label">Status</label>
+            <!-- Status -->
+            <div class="form-group mb-3">
+                <label asp-for="Status" class="form-label fw-bold">Status</label>
                 <select asp-for="Status" class="form-control">
                     <option value="Oczekiwanie">Oczekiwanie</option>
                     <option value="W trakcie">W trakcie</option>
                     <option value="Zakończone">Zakończone</option>
                 </select>
+                </select>
                 <span asp-validation-for="Status" class="text-danger"></span>
             </div>
 
-            <div class="form-group">
-                <input type="submit" value="Zapisz" class="btn btn-primary" />
+            <!-- Submit Button -->
+            <div class="form-group text-center">
+                <button type="submit" class="btn btn-primary px-5">Zapisz</button>
             </div>
         </form>
     </div>
 </div>
 
-<div>
-    <a asp-action="Index">Wróć do listy</a>
+<!-- Back to List -->
+<div class="mt-4 text-center">
+    <a asp-action="Index" class="btn btn-secondary">Wróć do listy</a>
 </div>
+
