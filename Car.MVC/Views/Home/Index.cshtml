@@ -1,8 +1,323 @@
 ﻿@{
-    ViewData["Title"] = "Home Page";
+    ViewData["Title"] = "Strona główna";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<style>
+    /* Resetowanie stylów */
+    body {
+        margin: 0;
+        padding: 0;
+        font-family: Arial, sans-serif;
+        background-color: #f4f7fc;
+        overflow-x: hidden; /* Ukrywanie poziomego przewijania */
+        box-sizing: border-box; /* Umożliwia lepsze kontrolowanie rozmiarów */
+    }
+
+    /* Ogólne ustawienia kontenerów */
+    .container {
+        width: 100%;  /* Zmieniamy na 100%, by dostosować szerokość do ekranu */
+        padding: 0;
+        max-width: 3840px;
+    }
+
+    /* Sekcja Hero */
+    .hero-section {
+        background: url('/images/workshop-background.jpg') no-repeat center center;
+        background-size: cover;
+        height: 60vh;
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        color: white;
+        margin: 0;
+        margin-top: -20px;
+    }
+
+    .hero-section h1 {
+        font-size: 3rem;
+        font-family: 'Woodford Bourne PRO', Arial, sans-serif;
+        font-weight: bold;
+        margin-bottom: 15px;
+    }
+
+    .hero-section p {
+        font-size: 1.25rem;
+        margin-bottom: 25px;
+    }
+
+    .hero-section .btn-lg {
+        padding: 15px 40px;
+        font-size: 1.2rem;
+        font-weight: bold;
+        border-radius: 25px;
+        background: linear-gradient(to right, #6a11cb, #2575fc);
+        border: none;
+        transition: transform 0.3s ease, background 0.3s ease;
+    }
+
+    .hero-section .btn-lg:hover {
+        transform: scale(1.1);
+        background: linear-gradient(to right, #2575fc, #6a11cb);
+    }
+
+    /* Dlaczego my */
+    .why-choose-us {
+        background: white;
+        padding: 50px 30px;
+    }
+
+    .why-choose-us h5 {
+        font-weight: bold;
+    }
+
+    .why-choose-us .card {
+        background: #f4f7fc;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .why-choose-us .card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.2);
+    }
+
+    /* Rezerwacja */
+    .booking-section {
+        background: linear-gradient(to right, #6a11cb, #2575fc);
+        color: white;
+        padding: 60px 20px;
+        position: relative;
+        margin-top: -150px;
+        z-index: 1;
+    }
+
+    .booking-section h2 {
+        font-size: 2.5rem;
+        font-weight: 600;
+        margin-bottom: 30px;
+    }
+
+    .booking-section input {
+        border-radius: 25px;
+        border: none;
+        box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+        padding: 10px 20px;
+    }
+
+    .booking-section button {
+        background: #fcb045;
+        background: linear-gradient(to right, #f7971e, #fcb045);
+        border: none;
+        padding: 10px 25px;
+        border-radius: 25px;
+        font-weight: bold;
+        box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s ease, background 0.3s ease;
+    }
+
+    .booking-section button:hover {
+        transform: scale(1.1);
+        background: linear-gradient(to right, #fcb045, #f7971e);
+    }
+
+    .booking-section::before,
+    .booking-section::after {
+        content: '';
+        position: absolute;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.2);
+        z-index: 0;
+        animation: floating 6s infinite ease-in-out;
+    }
+
+    .booking-section::before {
+        top: -50px;
+        left: -50px;
+        width: 200px;
+        height: 200px;
+    }
+
+    .booking-section::after {
+        bottom: -50px;
+        right: -50px;
+        width: 200px;
+        height: 200px;
+        animation-direction: reverse;
+    }
+
+    .container-why {
+        position: relative;
+        margin-top: -120px;
+        z-index: 2;
+    }
+
+    .booking-section-content {
+        margin-top: 50px;
+    }
+
+    /* Sekcja: Nasi mechanicy */
+.our-team h2 {
+    font-size: 2.5rem;
+    font-weight: 600;
+    margin-bottom: 30px;
+    color: #333;
+}
+
+.team-member {
+    background-color: white;
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.team-member:hover {
+    transform: translateY(-10px);
+    box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+.team-member img {
+    border: 5px solid #fff;
+    transition: transform 0.3s ease;
+}
+
+.team-member:hover img {
+    transform: scale(1.1);
+}
+
+.team-member h5 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-top: 15px;
+    color: #333;
+}
+
+.team-member p {
+    font-size: 1rem;
+    color: #777;
+    margin-bottom: 15px;
+}
+
+.text-muted {
+    color: #6c757d;
+}
+
+    
+</style>
+
+<!-- Sekcja Hero -->
+<div class="hero-section">
+    <h1>Zapewniamy profesjonalną i niezawodną obsługę</h1>
+    <p>Zadbamy o Twój pojazd najlepiej jak potrafimy.</p>
+    <a href="#find-out-more" class="btn btn-primary btn-lg " >Dowiedz się więcej</a>
 </div>
+
+<!-- Dlaczego my -->
+<div class="why-choose-us py-5 text-center" style="background: linear-gradient(to bottom, #f4f7fc, #ffffff);">
+    <div class="container-why">
+        <div class="row justify-content-center">
+            <!-- Eksperci mechaniki -->
+            <div class="col-lg-4 col-md-6 mb-4">
+                <div class="card shadow-lg border-0 h-100 text-center" style="border-radius: 20px; overflow: hidden; transition: transform 0.3s;">
+                    <div class="card-body d-flex flex-column align-items-center p-4">
+                        <h5 class="fw-bold">Profesjonalna Diagnostyka</h5>
+                        <p>Precyzyjna diagnoza to klucz do szybkiej i skutecznej naprawy Twojego pojazdu.</p>
+                    </div>
+                </div>
+            </div>
+
+
+            <!-- Rozsądne ceny -->
+            <div class="col-lg-4 col-md-6 mb-4">
+                <div class="card shadow-lg border-0 h-100 text-center" style="border-radius: 20px; overflow: hidden; transition: transform 0.3s;">
+                    <div class="card-body d-flex flex-column align-items-center p-4">
+                        <h5 class="fw-bold">Rozsądne ceny</h5>
+                        <p>Oferujemy przystępne ceny, które gwarantują wysoką jakość naszej pracy.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Szybka realizacja -->
+            <div class="col-lg-4 col-md-6 mb-4">
+                <div class="card shadow-lg border-0 h-100 text-center" style="border-radius: 20px; overflow: hidden; transition: transform 0.3s;">
+                    <div class="card-body d-flex flex-column align-items-center p-4">
+                        <h5 class="fw-bold">Szybka realizacja</h5>
+                        <p>W przypadku wykrycia dodatkowych problemów naprawiamy je od razu.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- Rezerwacja -->
+<div class="booking-section text-center py-5">
+    <div class="booking-section-content">
+        <h2>Kim jesteśmy?</h2>
+
+        <p class="mt-3 px-5">
+            <strong>Mechanix</strong> to warsztat samochodowy, który łączy profesjonalizm z pasją. Zajmujemy się kompleksową naprawą i serwisem pojazdów – od drobnych usterek po poważniejsze naprawy silników i układów mechanicznych. Nasz zespół doświadczonych mechaników, pod przewodnictwem pani Iwony, dba o każdy szczegół, by Twój samochód wrócił do pełnej sprawności. Oferujemy szybkie i rzetelne usługi, a także indywidualne podejście do każdego pojazdu. W <strong>Mechanix</strong> samochody dostają drugie życie, a ich właściciele pewność, że są w dobrych rękach.
+        </p>
+
+    </div>
+</div>
+
+@* <!-- Rezerwacja -->
+<div class="booking-section text-center py-5">
+    <div class="booking-section-content">
+        <h2>Zarezerwuj wizytę</h2>
+        <form class="d-inline-flex flex-column align-items-center">
+            <input type="text" class="form-control mb-3" placeholder="Imię i nazwisko" style="max-width: 400px;" required />
+            <input type="email" class="form-control mb-3" placeholder="Adres e-mail" style="max-width: 400px;" required />
+            <button type="submit" class="btn btn-primary">Zarezerwuj</button>
+        </form>
+        <p class="mt-3">lub zadzwoń do nas na numer <strong>+1 242 571 4860</strong></p>
+    </div>
+</div> *@
+
+<!-- Sekcja: Nasi mechanicy -->
+<div class="our-team py-5 text-center" style="background: #f4f7fc;">
+    <div class="container">
+        <h2 class="mb-5">Poznaj naszych mechaników</h2>
+        <div class="row justify-content-center px-5">
+
+            <!-- Mechanik 2 -->
+            <div class="col-md-4 mb-4">
+                <div class="team-member">
+                    <img src="/images/marek.png" alt="Mechanik 2" class="img-fluid rounded-circle mb-3" style="width: 200px; height: 200px;">
+                    <h5 class="fw-bold">Marek</h5>
+                    <p class="text-muted">Ekspert ds. układów hamulcowych</p>
+                    <p>Marek specjalizuje się w układach hamulcowych i bezpieczeństwie pojazdów. Zawsze dba o to, aby każdy samochód był gotowy do drogi w 100%.</p>
+                </div>
+            </div>
+
+            <!-- Mechanik 1 -->
+            <div class="col-md-4 mb-4">
+                <div class="team-member">
+                    <img src="/images/adrian.png" alt="Mechanik 1" class="img-fluid rounded-circle mb-3" style="width: 200px; height: 200px;">
+                    <h5 class="fw-bold">Adrian</h5>
+                    <p class="text-muted">Specjalista ds. silników</p>
+                    <p>Adrian ma ponad 10-letnie doświadczenie w naprawie silników. Jego pasja do motoryzacji sprawia, że każde zlecenie traktuje z pełnym zaangażowaniem.</p>
+                </div>
+            </div>
+
+            
+
+            <!-- Mechanik 3 -->
+            <div class="col-md-4 mb-4">
+                <div class="team-member">
+                    <img src="/images/adam.png" alt="Mechanik 3" class="img-fluid rounded-circle mb-3" style="width: 200px; height: 200px;">
+                    <h5 class="fw-bold">Adam</h5>
+                    <p class="text-muted">Specjalista ds. elektroniki samochodowej</p>
+                    <p>Adam jest ekspertem w naprawach układów elektronicznych. Zajmuje się nowoczesnymi systemami, w tym diagnostyką komputerową.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+

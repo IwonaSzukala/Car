@@ -28,4 +28,8 @@
     <ProjectReference Include="..\Car.Infrastructure\Car.Infrastructure.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Views\Images2\" />
+  </ItemGroup>
+
 </Project>

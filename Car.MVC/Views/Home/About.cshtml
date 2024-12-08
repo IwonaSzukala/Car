@@ -1,34 +1,120 @@
 ﻿@model About
 
 @{
-    ViewData["Title"] = "About";
+    ViewData["Title"] = "Oferta";
 }
 
-<h2>@Model.title</h2>
-<div class="alert alert-danger">@Model.description</div>
+<!-- Oferta - Mechanix -->
+<div class="container my-5">
+    <h2 class="text-center mb-5" style="font-family: 'Roboto', sans-serif; font-weight: 600; font-size: 2.5rem;">Nasza Oferta</h2>
 
-<ul>
-@foreach (var tags in Model.tags)
-{
-    <li>@tags</li>
-}
-</ul>
-
-<div class="container text-center">
     <div class="row">
-        <div class="col-sm-4 border">
-            Column
+        <!-- Diagnostyka komputerowa -->
+        <div class="col-lg-4 col-md-6 mb-4">
+            <div class="card shadow-lg border-0 h-100 text-center rounded-3" style="transition: transform 0.3s, box-shadow 0.3s; border-radius: 15px;">
+                <div class="card-body d-flex flex-column align-items-center p-5">
+                    <i class="bi bi-search-heart fs-1 mb-3"></i>
+                    <h5 class="fw-bold">Diagnostyka Komputerowa</h5>
+                    <p class="text-muted">Precyzyjna diagnoza usterek w systemach elektronicznych i mechanicznych pojazdu.</p>
+                </div>
+            </div>
         </div>
-        <div class="col-sm-1 border">
-            Column
+
+        <!-- Naprawa i serwis silników -->
+        <div class="col-lg-4 col-md-6 mb-4">
+            <div class="card shadow-lg border-0 h-100 text-center rounded-3" style="transition: transform 0.3s, box-shadow 0.3s;">
+                <div class="card-body d-flex flex-column align-items-center p-5">
+                    <i class="bi bi-gear fs-1 mb-3"></i>
+                    <h5 class="fw-bold">Naprawa i Serwis Silników</h5>
+                    <p class="text-muted">Kompleksowa naprawa i optymalizacja silników różnych typów.</p>
+                </div>
+            </div>
         </div>
-        <div class="col-sm-1 border">
-            Column
+
+        <!-- Układ hamulcowy i zawieszenie -->
+        <div class="col-lg-4 col-md-6 mb-4">
+            <div class="card shadow-lg border-0 h-100 text-center rounded-3" style="transition: transform 0.3s, box-shadow 0.3s;">
+                <div class="card-body d-flex flex-column align-items-center p-5">
+                    <i class="bi bi-brakes fs-1 mb-3"></i>
+                    <h5 class="fw-bold">Układ Hamulcowy i Zawieszenie</h5>
+                    <p class="text-muted">Wymiana i naprawa układów hamulcowych oraz zawieszenia dla bezpieczeństwa Twojego pojazdu.</p>
+                </div>
+            </div>
         </div>
-        <div class="col-sm-6 border">
-            Column
+
+        <!-- Klimatyzacja i ogrzewanie -->
+        <div class="col-lg-4 col-md-6 mb-4">
+            <div class="card shadow-lg border-0 h-100 text-center rounded-3" style="transition: transform 0.3s, box-shadow 0.3s;">
+                <div class="card-body d-flex flex-column align-items-center p-5">
+                    <i class="bi bi-snow fs-1 mb-3"></i>
+                    <h5 class="fw-bold">Klimatyzacja i Ogrzewanie</h5>
+                    <p class="text-muted">Serwis klimatyzacji oraz naprawy układu grzewczego dla komfortu jazdy w każdych warunkach.</p>
+                </div>
+            </div>
         </div>
+
+        <!-- Wymiana płynów eksploatacyjnych -->
+        <div class="col-lg-4 col-md-6 mb-4">
+            <div class="card shadow-lg border-0 h-100 text-center rounded-3" style="transition: transform 0.3s, box-shadow 0.3s;">
+                <div class="card-body d-flex flex-column align-items-center p-5">
+                    <i class="bi bi-droplet fs-1 mb-3"></i>
+                    <h5 class="fw-bold">Wymiana Płynów Eksploatacyjnych</h5>
+                    <p class="text-muted">Wymiana oleju silnikowego, płynów chłodniczych, hamulcowych i innych niezbędnych płynów.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Naprawy blacharsko-lakiernicze -->
+        <div class="col-lg-4 col-md-6 mb-4">
+            <div class="card shadow-lg border-0 h-100 text-center rounded-3" style="transition: transform 0.3s, box-shadow 0.3s;">
+                <div class="card-body d-flex flex-column align-items-center p-5">
+                    <i class="bi bi-paint-bucket fs-1 mb-3"></i>
+                    <h5 class="fw-bold">Naprawy Blacharsko-Lakiernicze</h5>
+                    <p class="text-muted">Usuwanie wgnieceń, rys i naprawy blacharskie z profesjonalnym lakierowaniem.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Serwis opon -->
+        <div class="col-lg-4 col-md-6 mb-4">
+            <div class="card shadow-lg border-0 h-100 text-center rounded-3" style="transition: transform 0.3s, box-shadow 0.3s;">
+                <div class="card-body d-flex flex-column align-items-center p-5">
+                    <i class="bi bi-tires fs-1 mb-3"></i>
+                    <h5 class="fw-bold">Montaż i Serwis Opon</h5>
+                    <p class="text-muted">Wymiana opon, balansowanie kół oraz naprawa uszkodzeń opon.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tuning i modyfikacje -->
+        <div class="col-lg-4 col-md-6 mb-4">
+            <div class="card shadow-lg border-0 h-100 text-center rounded-3" style="transition: transform 0.3s, box-shadow 0.3s;">
+                <div class="card-body d-flex flex-column align-items-center p-5">
+                    <i class="bi bi-turbo fs-1 mb-3"></i>
+                    <h5 class="fw-bold">Tuning i Modyfikacje</h5>
+                    <p class="text-muted">Wydobywanie większej mocy z silnika oraz modyfikacje wnętrza i wyglądu pojazdu.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Naprawa elektryczna i elektroniczna -->
+        <div class="col-lg-4 col-md-6 mb-4">
+            <div class="card shadow-lg border-0 h-100 text-center rounded-3" style="transition: transform 0.3s, box-shadow 0.3s;">
+                <div class="card-body d-flex flex-column align-items-center p-5">
+                    <i class="bi bi-plug fs-1 mb-3"></i>
+                    <h5 class="fw-bold">Naprawy Elektryczne i Elektroniczne</h5>
+                    <p class="text-muted">Serwis układów elektrycznych i elektronicznych, w tym akumulatorów, alternatorów i systemów bezpieczeństwa.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Holowanie i transport -->
+        
+    </div>
+
+    <!-- Więcej szczegółów po konsultacji z mechanikiem -->
+    <div class="text-center mt-5">
+        <h3 class="fw-bold">I wiele, wiele więcej!</h3>
+        <p class="text-muted">Jeśli chcesz dowiedzieć się więcej o naszych usługach, skontaktuj się z naszym mechanikiem, który udzieli Ci szczegółowych informacji i pomoże dobrać odpowiednią usługę do Twojego pojazdu.</p>
     </div>
 </div>
-
-
