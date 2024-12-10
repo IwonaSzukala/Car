@@ -19,21 +19,14 @@ namespace Car.Application.Car.Queries.GetByUsername
             _carRepository = carRepository;
         
         }
-        /*public async Task<CarDto> Handle(GetCarsByUsernameQuery request, CancellationToken cancellationToken)
-        {
-            var car = await _carRepository.GetByUsername(request.Username);
-
-            var dto = _mapper.Map<CarDto>(car);
-
-            return dto;
-        }*/
+        
         public async Task<CarDto?> Handle(GetCarsByUsernameQuery request, CancellationToken cancellationToken)
         {
             var car = await _carRepository.GetByUsername(request.Username);
 
             if (car == null)
             {
-                return null; // Brak samochodu dla użytkownika
+                return null; 
             }
 
             var dto = _mapper.Map<CarDto>(car);

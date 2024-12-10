@@ -60,7 +60,7 @@ namespace Car.Infrastructure.Repositories
         {
             var mechanicRoleId = await GetRoleIdByNameAsync("Mechanic");
 
-            // Pobierz u¿ytkowników, którzy maj¹ rolê "Mechanic"
+            
             var mechanics = await _dbContext.Set<IdentityUserRole<string>>()
                 .Where(ur => ur.RoleId == mechanicRoleId)
                 .Join(_dbContext.Set<ApplicationUser>(),

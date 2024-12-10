@@ -17,13 +17,13 @@ namespace Car.MVC.Controllers
 {
     public class UserController : Controller
     {
-        //private readonly IUserService _userService;
+        
         private readonly IMediator _mediator;
         private readonly IMapper _mapper;
 
         public UserController(IMediator mediator, IMapper mapper)
         {
-            //_userService = userService;
+            
             _mediator = mediator;
             _mapper = mapper;
         }
@@ -42,12 +42,7 @@ namespace Car.MVC.Controllers
             return View();
         }
 
-        /*[Route("User/{username}/Cars")]
-        public async Task<IActionResult> Details(string username)
-        {
-            var dto = await _mediator.Send(new GetCarsByUsernameQuery(username));   
-            return View(dto);
-        }*/
+        
 
         [Route("User/{username}/Cars")]
         public async Task<IActionResult> Details(string username)
@@ -57,19 +52,14 @@ namespace Car.MVC.Controllers
             if (carDto == null)
             {
                 ViewBag.Message = "U¿ytkownik nie posiada ¿adnych samochodów.";
-                return View(); // Wyœwietl widok z odpowiednim komunikatem.
+                return View(); 
             }
 
-            return View(carDto); // Jeœli jest samochód, zwróæ go do widoku.
+            return View(carDto); 
         }
 
 
-        //[Route("User/{username}/Edit")]
-        //public async Task<IActionResult> Edit(string username)
-        //{
-        //    var dto = await _mediator.Send(new GetCarsByUsernameQuery(username));
-        //    return View(dto);
-        //}
+       
 
         [HttpPost]
         public async Task<IActionResult> Create(CreateUserCommand command)
@@ -79,7 +69,7 @@ namespace Car.MVC.Controllers
                 return View(command);
             }
             await _mediator.Send(command);
-            return RedirectToAction(nameof(Create)); //todo
+            return RedirectToAction(nameof(Create)); 
         }
 
         [HttpPost]
@@ -92,18 +82,10 @@ namespace Car.MVC.Controllers
                 return View(command);
             }
             await _mediator.Send(command);
-            return RedirectToAction(nameof(Index)); //todo
+            return RedirectToAction(nameof(Index)); 
         }
 
-        /*[Route("User/{id}/Edit")]
-        public async Task<IActionResult> Edit(int id)
-        {
-            var dto = await _mediator.Send(new GetUserByIdQuery(id));
-
-            EditUserCommand model = _mapper.Map<EditUserCommand>(dto);
-
-            return View(model);
-        }*/
+       
         [Route("User/{id}/Edit")]
         [Authorize(Roles = "Mechanic, Admin")]
         public async Task<IActionResult> Edit(string id)
@@ -112,12 +94,12 @@ namespace Car.MVC.Controllers
 
             if (dto == null)
             {
-                return NotFound();  // U¿ytkownik nie znaleziony
+                return NotFound();  
             }
 
             EditUserCommand model = _mapper.Map<EditUserCommand>(dto);
 
-            // Dodaj logowanie lub breakpoint
+            
             Console.WriteLine($"User DTO: {dto.Username}, {dto.Email}");
 
             return View(model);
@@ -129,6 +111,15 @@ namespace Car.MVC.Controllers
             var dto = await _mediator.Send(new GetRepairsByUsernameQuery(username));
 
             return View(dto);
+            /*var dto = await _mediator.Send(new GetRepairsByUsernameQuery(username));
+
+            if (dto == null)
+            {
+                ViewBag.Message = "U¿ytkownik nie posiada ¿adnych napraw";
+                return View(); // Wyœwietl widok z odpowiednim komunikatem.
+            }
+
+            return View(dto); // Jeœli jest samochód, zwróæ go do widoku.*/
         }
     }
 }

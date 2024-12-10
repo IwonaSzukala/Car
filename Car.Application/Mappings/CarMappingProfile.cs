@@ -23,12 +23,7 @@ namespace Car.Application.Mappings
                 .ForMember(dto => dto.IsEditable, opt => opt.MapFrom(src => user != null && src.CreatedById == user.Id))
                 .ForMember(dto => dto.IsVisible, opt => opt.MapFrom(src => user != null && src.CreatedById == user.Id));
 
-                 /*CreateMap<Domain.Entities.Car, CarDto>()
-                .ForMember(dto => dto.IsEditable, opt => opt.MapFrom(src => user != null && src.CreatedById == user.Id))
-                .ForMember(dto => dto.IsVisible, opt => opt.MapFrom(src => user != null && src.CreatedById == user.Id));*/
-
-
-            CreateMap<CarDto, EditCarCommand>();
+                CreateMap<CarDto, EditCarCommand>();
 
         }
     }

@@ -5,7 +5,6 @@
     ViewData["Title"] = "Zaloguj się";
 }
 
-@* <h1 class="text-center mt-4">@ViewData["Title"]</h1> *@
 
 <div class="row justify-content-center">
     <div class="col-md-6 col-lg-5">
@@ -39,9 +38,7 @@
                     </div>
 
                     <div class="text-center">
-                        @* <p class="mb-1">
-                        <a asp-page="./ForgotPassword">Zapomniałeś hasła?</a>
-                        </p> *@
+                        
                         <p>
                             <a asp-page="./Register" asp-route-returnUrl="@Model.ReturnUrl">Zarejestruj się jako nowy użytkownik</a>
                         </p>

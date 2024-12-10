@@ -18,27 +18,22 @@ namespace Car.Application.Car
         public string CarModel { get; set; } = default!;
         public string MechanicId { get; set; }
 
-        //[Required]
+        
         public DateTime ReservationDate { get; set; } = DateTime.UtcNow;
 
-        public ApplicationUser? Mechanic { get; set; } //doda³am to
-        //[Required]
+        public ApplicationUser? Mechanic { get; set; } 
+        
         public string? Information { get; set; }
 
         public string Status { get; set; } = "Oczekiwanie";
-        //public string Status { get; set; } = default!; TAK SAMO JAK MA PODAC STATUS?
-
-        // Nawigacja do mechanika
-        //public User Mechanic { get; set; } = default!;
-
-        //Nawigacja do samochodu
+        
 
         public bool IsEditable { get; set; }
-        public bool IsVisible { get; set; } //czy jest wyœwietlane, to ja sama zrobi³am
+        public bool IsVisible { get; set; } 
         public Domain.Entities.Car? Car { get; set; } = default!;
 
         public string? CreatedById { get; set; }
-        public ApplicationUser? CreatedBy { get; set; } //sama to doda³am
+        public ApplicationUser? CreatedBy { get; set; } 
 
     }
 }

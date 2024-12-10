@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using AutoMapper;
 using Car.Application.ApplicationUserFolder;
 using Car.Application.Car;
-using Car.Application.Car.Commands.EditCar;//komentarz
+using Car.Application.Car.Commands.EditCar;
 using Car.Domain.Entities;
 
 namespace Car.Application.Mappings

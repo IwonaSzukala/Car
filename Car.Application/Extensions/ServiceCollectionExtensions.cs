@@ -21,50 +21,13 @@ namespace Car.Application.Extensions
     {
         public static void AddApplication(this IServiceCollection services)
         {
-            //services.AddScoped<ICarService, CarService>();
-            //services.AddScoped<IUserService, UserService>();
-            //services.AddScoped<IRepairService, RepairService>();
             services.AddScoped<IUserContext,UserContext>();
 
             services.AddMediatR(typeof(CreateCarCommand));
             services.AddMediatR(typeof(CreateRepairCommand));
             services.AddMediatR(typeof(CreateUserCommand));
 
-            /*services.AddAutoMapper(typeof(CarMappingProfile));
-            services.AddAutoMapper(typeof(UserMappingProfile));
-            services.AddAutoMapper(typeof(RepairMappingProfile));
-            services.AddAutoMapper(typeof(RepairWithCarMappingProfile));*/
-            /*            services.AddScoped(provider => new MapperConfiguration(cfg =>
-                        {
-                            var scope = provider.CreateScope();
-                            var userContext = scope.ServiceProvider.GetRequiredService<IUserContext>();
-                            cfg.AddProfile(new CarMappingProfile(userContext)); //chat dodał mi usercontext w nawiasie
-                        }).CreateMapper()
-                        );
-
-                        services.AddScoped(provider => new MapperConfiguration(cfg =>
-                        {
-                            var scope = provider.CreateScope();
-                            var userContext = scope.ServiceProvider.GetRequiredService<IUserContext>();
-                            cfg.AddProfile(new RepairMappingProfile(userContext));
-                        }).CreateMapper()
-                        );
-
-                        services.AddScoped(provider => new MapperConfiguration(cfg =>
-                        {
-                            var scope = provider.CreateScope();
-                            var userContext = scope.ServiceProvider.GetRequiredService<IUserContext>();
-                            cfg.AddProfile(new RepairWithCarMappingProfile(userContext));
-                        }).CreateMapper()
-                        );
-
-                        services.AddScoped(provider => new MapperConfiguration(cfg =>
-                        {
-                            var scope = provider.CreateScope();
-                            var userContext = scope.ServiceProvider.GetRequiredService<IUserContext>();
-                            cfg.AddProfile(new UserMappingProfile());
-                        }).CreateMapper()
-                        );*/
+            
             services.AddScoped(provider => new MapperConfiguration(cfg =>
             {
                 var scope = provider.CreateScope();
@@ -83,11 +46,6 @@ namespace Car.Application.Extensions
             services.AddValidatorsFromAssemblyContaining<CreateUserCommandValidator>()
                 .AddFluentValidationAutoValidation()
                 .AddFluentValidationClientsideAdapters();
-
-/*            services.AddValidatorsFromAssemblyContaining<CreateRepairCommandValidator>()
-                .AddFluentValidationAutoValidation()
-                .AddFluentValidationClientsideAdapters();*/
-
 
         }
     }

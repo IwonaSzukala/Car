@@ -26,8 +26,6 @@ namespace Car.Infrastructure.Repositories
         public async Task<IEnumerable<Domain.Entities.Car>> GetAll()
             => await _dbContext.Cars.ToListAsync();
 
-        /*public async Task<Domain.Entities.Car?> GetByUsername(string username)
-        => await _dbContext.Cars.Include(c => c.User).FirstAsync(c => c.User.UserName == username);*/
 
         public async Task<Domain.Entities.Car?> GetByUsername(string username)
         {

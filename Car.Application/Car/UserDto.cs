@@ -29,7 +29,7 @@ namespace Car.Application.Car
        
         public string? PostalCode { get; set; }
         public string? CreatedById { get; set; }
-        public ApplicationUser? CreatedBy { get; set; } //sama to doda³am
+        public ApplicationUser? CreatedBy { get; set; } 
 
 
 

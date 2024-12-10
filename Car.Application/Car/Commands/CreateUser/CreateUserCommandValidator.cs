@@ -51,9 +51,7 @@ namespace Car.Application.Car.Commands.CreateUser
             RuleFor(c => c.PhoneNumber)
                 .NotEmpty().WithMessage("To pole nie mo¿e byæ puste")
                 .Matches(@"^\d{9}$").WithMessage("To pole musi sk³adaæ siê z dok³adnie 9 cyfr");
-            //.MaximumLength(9).WithMessage("To pole musi sk³adaæ siê z 9 znaków")
-            //.MinimumLength(9).WithMessage("To pole musi sk³adaæ siê z 9 znaków");
-
+            
             RuleFor(c => c.Street)
                 .NotEmpty().WithMessage("To pole nie mo¿e byæ puste");
 

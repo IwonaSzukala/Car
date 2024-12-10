@@ -23,7 +23,7 @@ namespace Car.Application.Mappings
                     PostalCode = src.PostalCode
 
                 }));
-            //CreateMap<Domain.Entities.User, UserDto>();
+            
 
             CreateMap<Domain.Entities.ApplicationUser, UserDto>()
                 .ForMember(dto => dto.PhoneNumber, opt => opt.MapFrom(src => src.PhoneNumber))
@@ -31,9 +31,9 @@ namespace Car.Application.Mappings
                 .ForMember(dto => dto.City, opt => opt.MapFrom(src => src.ContactDetails.City))
                 .ForMember(dto => dto.PostalCode, opt => opt.MapFrom(src => src.ContactDetails.PostalCode));
             CreateMap<UserDto, EditUserCommand>()
-    .ForMember(dest => dest.Street, opt => opt.MapFrom(src => src.Street))
-    .ForMember(dest => dest.City, opt => opt.MapFrom(src => src.City))
-    .ForMember(dest => dest.PostalCode, opt => opt.MapFrom(src => src.PostalCode));
+                .ForMember(dest => dest.Street, opt => opt.MapFrom(src => src.Street))
+                .ForMember(dest => dest.City, opt => opt.MapFrom(src => src.City))
+                .ForMember(dest => dest.PostalCode, opt => opt.MapFrom(src => src.PostalCode));
     
 
 

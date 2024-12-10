@@ -10,7 +10,7 @@
             <div class="card-body">
                 <h2 class="card-title text-center mb-4">Dodaj nowy pojazd</h2>
                 <form action="/Car/Create" method="post">
-                    <!-- Ukryte pole z UserId -->
+                    
                     <input type="hidden" id="UserId" asp-for="UserId" value="@User.FindFirstValue(ClaimTypes.NameIdentifier)" />
 
                     <div class="form-floating mb-3">

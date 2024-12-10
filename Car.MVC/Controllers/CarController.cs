@@ -16,14 +16,12 @@ namespace Car.MVC.Controllers
 {
     public class CarController : Controller 
     {
-        //private readonly IUserService _userService;
-        //private readonly ICarService _carService;
-
+        
         private readonly IMediator _mediator;
         private readonly IMapper _mapper;
         public CarController(IMediator mediator, IMapper mapper) 
         {
-            //_carService= carService;
+            
             _mediator = mediator;
             _mapper = mapper;
         }
@@ -51,12 +49,10 @@ namespace Car.MVC.Controllers
             {
                 return View(command);
             }
-            //var userId = car.UserId;
-            //User user = await _userService.GetUserByIdAsync(userId);
-            //car.User= user;
+            
 
             await _mediator.Send(command);
-            return RedirectToAction(nameof(Index)); //todo
+            return RedirectToAction(nameof(Index)); 
         }
 
         [HttpPost]
@@ -69,11 +65,9 @@ namespace Car.MVC.Controllers
                 return View(command);
             }
 
-            //var userId = car.UserId;
-            //User user = await _userService.GetUserByIdAsync(userId);
-            //car.User= user;
+            
             await _mediator.Send(command);
-            return RedirectToAction(nameof(Index)); //todo
+            return RedirectToAction(nameof(Index)); 
         }
 
         [Authorize]

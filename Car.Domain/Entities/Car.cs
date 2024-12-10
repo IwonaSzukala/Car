@@ -17,14 +17,14 @@ namespace Car.Domain.Entities
         public string VIN { get; set; } = default!;
 
         public string? CreatedById { get; set; }
-        public ApplicationUser? CreatedBy { get; set; } //zamieniłam
-                                                        //
+        public ApplicationUser? CreatedBy { get; set; } 
+                                                        
 
 
 
 
-        // Relacja z User
-        public string? UserId { get; set; } // Klucz obcy
+        
+        public string? UserId { get; set; } 
         public ApplicationUser User { get; set; } = default!;
 
         public ICollection<Repair> Repair { get; set; } = new List<Repair>();

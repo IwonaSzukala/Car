@@ -11,12 +11,7 @@ namespace Car.Application.Car.Commands.CreateRepair
     {
         public CreateRepairCommandValidator()
         {
-           /* RuleFor(c => c.ReservationDate)
-                .NotEmpty().WithMessage("To pole nie mo¿e byæ puste");
-
-            RuleFor(c => c.Information)
-                .NotEmpty().WithMessage("To pole nie mo¿e byæ puste");*/
-
+           
         }
     }
 }

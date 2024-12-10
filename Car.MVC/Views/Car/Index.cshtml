@@ -34,11 +34,7 @@
                                 <li><b>VIN:</b> @item.VIN</li>
                             </ul>
                             <div class="d-flex justify-content-between mt-3">
-                                @* Dodaj przycisk edycji, jeśli jest edytowalny *@
-                                @* @if (item.IsEditable)
-                                {
-                                    <a asp-controller="Car" asp-action="Edit" asp-route-id="@item.Id" class="btn btn-primary btn-sm">Edytuj</a>
-                                } *@
+                                
                                 <form asp-controller="Car" asp-action="Delete" asp-route-id="@item.Id" method="post" style="display:inline;">
                                     <button type="submit" class="btn btn-danger btn-sm">Usuń</button>
                                 </form>

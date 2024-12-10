@@ -96,7 +96,7 @@ namespace Car.MVC.Areas.Identity.Pages.Account
 
             returnUrl ??= Url.Content("~/");
 
-            // Clear the existing external cookie to ensure a clean login process
+            
             await HttpContext.SignOutAsync(IdentityConstants.ExternalScheme);
 
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
@@ -112,8 +112,7 @@ namespace Car.MVC.Areas.Identity.Pages.Account
 
             if (ModelState.IsValid)
             {
-                // This doesn't count login failures towards account lockout
-                // To enable password failures to trigger account lockout, set lockoutOnFailure: true
+                
                 var user = await _userManager.FindByEmailAsync(Input.Email);
                 if (user == null)
                 {
@@ -131,7 +130,7 @@ namespace Car.MVC.Areas.Identity.Pages.Account
                 return RedirectToPage("/Index");
             }
 
-            // If we got this far, something failed, redisplay form
+            
             return Page();
         }
     }

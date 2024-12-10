@@ -25,10 +25,10 @@ namespace Car.Application.Car
 
         public ApplicationUser? User { get; set; }
         public bool IsEditable { get; set; }
-        public bool IsVisible { get; set; } //czy jest wyświetlane, to ja sama zrobiłam
+        public bool IsVisible { get; set; } 
 
         public string? CreatedById { get; set; }
-        public ApplicationUser? CreatedBy { get; set; } //sama to dodałam
+        public ApplicationUser? CreatedBy { get; set; } 
 
     }
 }

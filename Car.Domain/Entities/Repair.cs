@@ -17,12 +17,12 @@ namespace Car.Domain.Entities
         public string Status { get; set; } = "Oczekiwanie";
 
         public string? CreatedById { get; set; }
-        public ApplicationUser? CreatedBy { get; set; } //zamieniłam z identityuser
+        public ApplicationUser? CreatedBy { get; set; } 
 
-        // Nawigacja do mechanika
+        
         public ApplicationUser Mechanic { get; set; } = default!;
 
-        // Nawigacja do samochodu
+        
         public Car Car { get; set; } = default!;
     }
 

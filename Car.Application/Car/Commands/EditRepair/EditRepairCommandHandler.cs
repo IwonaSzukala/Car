@@ -25,10 +25,7 @@ namespace Car.Application.Car.Commands.EditRepair
         public async Task<Unit> Handle(EditRepairCommand? request, CancellationToken cancellationToken)
         {
             var currentUser = _userContext.GetCurrentUser();
-/*            if (currentUser == null || !currentUser.IsInRole("Mechanic, Admin"))
-            {
-                return Unit.Value;
-            }*/
+
 
             var repair = await _repository.GetById(request.Id);
 
@@ -37,7 +34,7 @@ namespace Car.Application.Car.Commands.EditRepair
             repair.Information = request.Information;
             repair.Status = request.Status;
 
-            repair.CreatedById = currentUser.Id; //do edytowania naprawy
+            repair.CreatedById = currentUser.Id; 
               
             await _repository.Commit();
             return Unit.Value;

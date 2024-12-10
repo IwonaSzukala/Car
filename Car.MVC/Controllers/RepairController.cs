@@ -24,13 +24,13 @@ namespace Car.MVC.Controllers
 {
     public class RepairController : Controller
     {
-        //private readonly IRepairService _repairService;
+        
         private readonly IMediator _mediator;
         private readonly IMapper _mapper;
         private readonly IUserContext _userContext;
         public RepairController(IMediator mediator, IMapper mapper)
         {
-            //_repairService = repairService;
+            
             _mapper = mapper;
             _mediator = mediator;
                     }
@@ -56,7 +56,7 @@ namespace Car.MVC.Controllers
                 return View(model);
             }
             await _mediator.Send(model.CreateRepairCommand);
-            return RedirectToAction(nameof(Index)); //todo
+            return RedirectToAction(nameof(Index)); 
         }
 
         [HttpPost]
@@ -69,7 +69,7 @@ namespace Car.MVC.Controllers
                 return View(command);
             }
             await _mediator.Send(command);
-            return RedirectToAction(nameof(Index)); //todo
+            return RedirectToAction(nameof(Index)); 
         }
 
         [Authorize]
@@ -77,7 +77,7 @@ namespace Car.MVC.Controllers
         {
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
             var repairs = await _mediator.Send(new GetRepairByUserIdQuery(userId));
-            /*var repairs = await _mediator.Send(new GetAllRepairsQuery());*/
+            
             return View(repairs);
         }
 
@@ -98,15 +98,7 @@ namespace Car.MVC.Controllers
             var dto = await _mediator.Send(new GetRepairByIdQuery(id));
 
 
-            /*if (!dto.IsEditable)
-            {
-                return RedirectToAction("NoAccess", "Home");
-            }*/
-
-            /*if (!dto.IsVisible)
-            {
-                return RedirectToAction("NoAccess", "Home");
-            }*/ //BO WTEDY NIE DZIA£A ZMIANA DLA ADMINA
+            
 
             EditRepairCommand model = _mapper.Map<EditRepairCommand>(dto);
 
