@@ -53,14 +53,12 @@
                     @if (User.IsInRole("Admin") || User.IsInRole("Mechanic"))
                     {
                         <td>
-                            @if (item.IsEditable)
-                            {
+                           
                                 <a asp-controller="Repair" asp-action="Edit" asp-route-id="@item.Id" class="btn btn-primary btn-sm me-1">Edytuj</a>
-                            }
-                            @if (User.IsInRole("Admin"))
-                            {
-                                <a asp-controller="Repair" asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger btn-sm">Usuń</a>
-                            }
+                            
+                            
+                                
+                            
                         </td>
                     }
                 </tr>

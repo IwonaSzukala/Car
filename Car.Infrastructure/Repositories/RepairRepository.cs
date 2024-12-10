@@ -34,6 +34,7 @@ namespace Car.Infrastructure.Repositories
         public async Task<IEnumerable<Repair>> GetByUsername(string username)
         {
             var repairs = await _dbContext.Repairs
+                .Include(r => r.Mechanic)
                 .Include(r => r.Car)
                 .ThenInclude(c => c.User)
                 .Where(r => r.Car.User.UserName == username)
@@ -46,5 +47,16 @@ namespace Car.Infrastructure.Repositories
 
         public Task Commit()
             => _dbContext.SaveChangesAsync();
+
+        public async Task<IEnumerable<Repair>> GetRepairByUserId(string userId)
+        {
+            var repairs = await _dbContext.Repairs
+                .Include(r => r.Mechanic)
+                .Include(r => r.Car)
+                .ThenInclude(c => c.User)
+                .Where(r => r.Car.User.Id == userId)
+                .ToListAsync();
+            return repairs;
+        }
     }
 }

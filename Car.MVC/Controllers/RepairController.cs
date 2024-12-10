@@ -1,4 +1,5 @@
 using AutoMapper;
+using Car.Application.ApplicationUserFolder;
 using Car.Application.Car;
 using Car.Application.Car.Commands.CreateCar;
 using Car.Application.Car.Commands.CreateRepair;
@@ -9,6 +10,7 @@ using Car.Application.Car.Queries.GetAllRepairs;
 using Car.Application.Car.Queries.GetById;
 using Car.Application.Car.Queries.GetByUsername;
 using Car.Application.Car.Queries.GetCarsByUserId;
+using Car.Application.Car.Queries.GetRepairByUserId;
 using Car.Application.Car.Queries.GetUserWithMechanicRole;
 using Car.Domain.Entities;
 using Car.MVC.Models;
@@ -25,12 +27,13 @@ namespace Car.MVC.Controllers
         //private readonly IRepairService _repairService;
         private readonly IMediator _mediator;
         private readonly IMapper _mapper;
+        private readonly IUserContext _userContext;
         public RepairController(IMediator mediator, IMapper mapper)
         {
             //_repairService = repairService;
             _mapper = mapper;
             _mediator = mediator;
-        }
+                    }
 
         [Authorize]
         public async Task<IActionResult> Create()
@@ -72,11 +75,13 @@ namespace Car.MVC.Controllers
         [Authorize]
         public async Task<IActionResult> Index()
         {
-            var repairs = await _mediator.Send(new GetAllRepairsQuery());
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var repairs = await _mediator.Send(new GetRepairByUserIdQuery(userId));
+            /*var repairs = await _mediator.Send(new GetAllRepairsQuery());*/
             return View(repairs);
         }
 
-        [Authorize]
+        [Authorize(Roles = "Mechanic, Admin")]
         [Route("Repair/List/{username}")]
         public async Task<IActionResult> ShowByUsername(string username)
         {

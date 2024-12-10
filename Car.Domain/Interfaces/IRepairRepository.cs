@@ -18,5 +18,6 @@ namespace Car.Domain.Interfaces
 
         Task<Domain.Entities.Repair?> GetById(int id);
         Task Commit();
+        Task<IEnumerable<Domain.Entities.Repair?>> GetRepairByUserId(string userId);
     }
 }
