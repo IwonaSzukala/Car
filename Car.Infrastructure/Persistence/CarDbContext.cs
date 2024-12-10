@@ -18,18 +18,15 @@ namespace Car.Infrastructure.Persistence
         {
             base.OnModelCreating(modelBuilder);
 
-            
             modelBuilder.Entity<ApplicationUser>()
                 .OwnsOne(u => u.ContactDetails);
 
-            
             modelBuilder.Entity<Domain.Entities.Car>()
                 .HasOne(c => c.User)
                 .WithMany(u => u.Cars)
                 .HasForeignKey(c => c.UserId)
                 .OnDelete(DeleteBehavior.Cascade);
 
-            
             modelBuilder.Entity<Repair>()
                 .HasOne(r => r.Mechanic)
                 .WithMany(u => u.Repairs)

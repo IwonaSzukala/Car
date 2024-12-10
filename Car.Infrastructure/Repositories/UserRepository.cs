@@ -15,10 +15,12 @@ namespace Car.Infrastructure.Repositories
     internal class UserRepository : IUserRepository
     {
         private readonly CarDbContext _dbContext;
+
         public UserRepository(CarDbContext dbContext)
         {
             _dbContext = dbContext;
         }
+
         public async Task Create(Domain.Entities.ApplicationUser user)
         {
             _dbContext.Add(user);
@@ -28,25 +30,33 @@ namespace Car.Infrastructure.Repositories
         public async Task<ApplicationUser> FindById(string userId)
         {
             return await _dbContext.Users.FirstOrDefaultAsync(u => u.Id == userId);
-
         }
 
         public async Task<IEnumerable<Domain.Entities.ApplicationUser>> GetAll()
-            => await _dbContext.Users.ToListAsync();
-
-
+        {
+            return await _dbContext.Users.ToListAsync();
+        }
 
         public Task<Domain.Entities.ApplicationUser?> GetByName(string username)
-            => _dbContext.Users.FirstOrDefaultAsync(cw => cw.UserName.ToLower() == username.ToLower());
+        {
+            return _dbContext.Users.FirstOrDefaultAsync(cw => cw.UserName.ToLower() == username.ToLower());
+        }
 
         public Task<Domain.Entities.ApplicationUser?> GetByEmail(string email)
-            => _dbContext.Users.FirstOrDefaultAsync(cw => cw.Email.ToLower() == email.ToLower());
+        {
+            return _dbContext.Users.FirstOrDefaultAsync(cw => cw.Email.ToLower() == email.ToLower());
+        }
 
         public async Task<Domain.Entities.ApplicationUser?> GetById(string id)
-            => await _dbContext.Users.FirstOrDefaultAsync(cw => cw.Id == id);
+        {
+            return await _dbContext.Users.FirstOrDefaultAsync(cw => cw.Id == id);
+        }
 
         public Task Commit()
-            => _dbContext.SaveChangesAsync();
+        {
+            return _dbContext.SaveChangesAsync();
+        }
+
         public async Task<string> GetRoleIdByNameAsync(string roleName)
         {
             var role = await _dbContext.Set<IdentityRole>()
@@ -60,7 +70,6 @@ namespace Car.Infrastructure.Repositories
         {
             var mechanicRoleId = await GetRoleIdByNameAsync("Mechanic");
 
-            
             var mechanics = await _dbContext.Set<IdentityUserRole<string>>()
                 .Where(ur => ur.RoleId == mechanicRoleId)
                 .Join(_dbContext.Set<ApplicationUser>(),
@@ -68,6 +77,7 @@ namespace Car.Infrastructure.Repositories
                         user => user.Id,
                         (ur, user) => user)
                 .ToListAsync();
+
             return mechanics;
         }
     }

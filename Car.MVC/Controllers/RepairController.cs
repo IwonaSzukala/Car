@@ -20,27 +20,25 @@ using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
 
 namespace Car.MVC.Controllers
-
 {
     public class RepairController : Controller
     {
-        
         private readonly IMediator _mediator;
         private readonly IMapper _mapper;
         private readonly IUserContext _userContext;
+
         public RepairController(IMediator mediator, IMapper mapper)
         {
-            
             _mapper = mapper;
             _mediator = mediator;
-                    }
+        }
 
         [Authorize]
         public async Task<IActionResult> Create()
         {
             var model = new CreateRepairViewModel
             {
-                Cars = await (_mediator.Send(new GetCarsByUserIdQuery(User.FindFirstValue(System.Security.Claims.ClaimTypes.NameIdentifier)))),
+                Cars = await _mediator.Send(new GetCarsByUserIdQuery(User.FindFirstValue(ClaimTypes.NameIdentifier))),
                 Mechanics = await _mediator.Send(new GetUserWithMechanicRoleQuery()),
                 CreateRepairCommand = new CreateRepairCommand(),
             };
@@ -56,7 +54,7 @@ namespace Car.MVC.Controllers
                 return View(model);
             }
             await _mediator.Send(model.CreateRepairCommand);
-            return RedirectToAction(nameof(Index)); 
+            return RedirectToAction(nameof(Index));
         }
 
         [HttpPost]
@@ -69,7 +67,7 @@ namespace Car.MVC.Controllers
                 return View(command);
             }
             await _mediator.Send(command);
-            return RedirectToAction(nameof(Index)); 
+            return RedirectToAction(nameof(Index));
         }
 
         [Authorize]
@@ -77,7 +75,6 @@ namespace Car.MVC.Controllers
         {
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
             var repairs = await _mediator.Send(new GetRepairByUserIdQuery(userId));
-            
             return View(repairs);
         }
 
@@ -85,7 +82,6 @@ namespace Car.MVC.Controllers
         [Route("Repair/List/{username}")]
         public async Task<IActionResult> ShowByUsername(string username)
         {
-            
             var repairs = await _mediator.Send(new GetRepairsByUsernameQuery(username));
             return View(repairs);
         }
@@ -94,17 +90,9 @@ namespace Car.MVC.Controllers
         [Route("Repair/{id}/Edit")]
         public async Task<IActionResult> Edit(int id)
         {
-            
             var dto = await _mediator.Send(new GetRepairByIdQuery(id));
-
-
-            
-
             EditRepairCommand model = _mapper.Map<EditRepairCommand>(dto);
-
             return View(model);
         }
-
-
     }
 }

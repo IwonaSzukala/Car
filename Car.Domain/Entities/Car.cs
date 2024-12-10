@@ -15,18 +15,10 @@ namespace Car.Domain.Entities
         public string ProductionYear { get; set; } = default!;
         public string RegistrationNumber { get; set; } = default!;
         public string VIN { get; set; } = default!;
-
         public string? CreatedById { get; set; }
-        public ApplicationUser? CreatedBy { get; set; } 
-                                                        
-
-
-
-
-        
+        public ApplicationUser? CreatedBy { get; set; }                                                    
         public string? UserId { get; set; } 
         public ApplicationUser User { get; set; } = default!;
-
         public ICollection<Repair> Repair { get; set; } = new List<Repair>();
     }
 

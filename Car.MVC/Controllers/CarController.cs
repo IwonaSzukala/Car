@@ -12,16 +12,14 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Car.MVC.Controllers
-
 {
-    public class CarController : Controller 
+    public class CarController : Controller
     {
-        
         private readonly IMediator _mediator;
         private readonly IMapper _mapper;
-        public CarController(IMediator mediator, IMapper mapper) 
+
+        public CarController(IMediator mediator, IMapper mapper)
         {
-            
             _mediator = mediator;
             _mapper = mapper;
         }
@@ -39,8 +37,6 @@ namespace Car.MVC.Controllers
             return View();
         }
 
-        
-
         [HttpPost]
         [Authorize]
         public async Task<IActionResult> Create(CreateCarCommand command)
@@ -49,10 +45,9 @@ namespace Car.MVC.Controllers
             {
                 return View(command);
             }
-            
 
             await _mediator.Send(command);
-            return RedirectToAction(nameof(Index)); 
+            return RedirectToAction(nameof(Index));
         }
 
         [HttpPost]
@@ -65,30 +60,22 @@ namespace Car.MVC.Controllers
                 return View(command);
             }
 
-            
             await _mediator.Send(command);
-            return RedirectToAction(nameof(Index)); 
+            return RedirectToAction(nameof(Index));
         }
 
         [Authorize]
         [Route("Car/{id}/Edit")]
         public async Task<IActionResult> Edit(int id)
         {
-           
             var dto = await _mediator.Send(new GetCarByIdQuery(id));
 
-            if (!dto.IsEditable)
-            {
-                return RedirectToAction("NoAccess", "Home");
-            }
-
-            if (!dto.IsVisible)
+            if (!dto.IsEditable || !dto.IsVisible)
             {
                 return RedirectToAction("NoAccess", "Home");
             }
 
             EditCarCommand model = _mapper.Map<EditCarCommand>(dto);
-            
             return View(model);
         }
 
@@ -102,5 +89,3 @@ namespace Car.MVC.Controllers
         }
     }
 }
-
-

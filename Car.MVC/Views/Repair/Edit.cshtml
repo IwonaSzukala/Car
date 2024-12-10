@@ -1,6 +1,4 @@
-﻿
-
-@model Car.Application.Car.Commands.EditCar.EditRepairCommand
+﻿@model Car.Application.Car.Commands.EditCar.EditRepairCommand
 
 @{
     ViewData["Title"] = "Zarządzanie wizytą";
@@ -13,25 +11,20 @@
         <form asp-action="Edit" class="p-4 border rounded bg-white shadow">
             <div asp-validation-summary="ModelOnly" class="alert alert-danger" role="alert"></div>
 
-            
             <input asp-for="MechanicId" type="hidden" value="@Model.MechanicId" />
-            
 
-            
             <div class="form-group mb-3">
                 <label asp-for="ReservationDate" class="form-label fw-bold">Data wizyty</label>
                 <input asp-for="ReservationDate" type="datetime-local" class="form-control" />
                 <span asp-validation-for="ReservationDate" class="text-danger"></span>
             </div>
 
-            
             <div class="form-group mb-3">
                 <label asp-for="Information" class="form-label fw-bold">Informacja dla mechanika</label>
                 <textarea asp-for="Information" class="form-control" rows="3" placeholder="Wprowadź dodatkowe informacje"></textarea>
                 <span asp-validation-for="Information" class="text-danger"></span>
             </div>
 
-            
             <div class="form-group mb-3">
                 <label asp-for="Status" class="form-label fw-bold">Status</label>
                 <select asp-for="Status" class="form-control">
@@ -39,11 +32,9 @@
                     <option value="W trakcie">W trakcie</option>
                     <option value="Zakończone">Zakończone</option>
                 </select>
-                </select>
                 <span asp-validation-for="Status" class="text-danger"></span>
             </div>
 
-            
             <div class="form-group text-center">
                 <button type="submit" class="btn btn-primary px-5">Zapisz</button>
             </div>
@@ -51,8 +42,6 @@
     </div>
 </div>
 
-
 <div class="mt-4 text-center">
     <a asp-action="Index" class="btn btn-secondary">Wróć do listy</a>
 </div>
-

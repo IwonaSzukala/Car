@@ -15,14 +15,9 @@ namespace Car.Domain.Entities
         public DateTime? ReservationDate { get; set; }
         public string Information { get; set; } = default!;
         public string Status { get; set; } = "Oczekiwanie";
-
         public string? CreatedById { get; set; }
-        public ApplicationUser? CreatedBy { get; set; } 
-
-        
-        public ApplicationUser Mechanic { get; set; } = default!;
-
-        
+        public ApplicationUser? CreatedBy { get; set; }         
+        public ApplicationUser Mechanic { get; set; } = default!;        
         public Car Car { get; set; } = default!;
     }
 

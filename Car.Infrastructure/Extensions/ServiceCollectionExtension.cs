@@ -21,8 +21,8 @@ namespace Car.Infrastructure.Extensions
     {
         public static void AddInfrastructure(this IServiceCollection services, IConfiguration configuration)
         {
-            services.AddDbContext<CarDbContext>(options => options.UseSqlServer(
-            configuration.GetConnectionString("Car")));
+            services.AddDbContext<CarDbContext>(options =>
+                options.UseSqlServer(configuration.GetConnectionString("Car")));
 
             services.AddDefaultIdentity<ApplicationUser>()
                 .AddRoles<IdentityRole>()

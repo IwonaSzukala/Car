@@ -1,7 +1,6 @@
 ﻿@{
     var action = ViewContext.RouteData.Values["Action"]?.ToString();
     var controller = ViewContext.RouteData.Values["Controller"]?.ToString();
-
 }
 
 <!DOCTYPE html>
@@ -35,33 +34,28 @@
                             <a class="nav-link text-dark @(controller == "Home" && action == "About" ? "active" : "")" asp-area="" asp-controller="Home" asp-action="About">Oferta</a>
                         </li>
 
-                        
                         @if (User.Identity.IsAuthenticated)
                         {
                             <li class="nav-item">
-                                <a class="nav-link text-dark @(controller == "Car" && action == "Index" ? "active" : "")" 
-                                   asp-area="" asp-controller="Car" asp-action="Index">Moje pojazdy</a>
+                                <a class="nav-link text-dark @(controller == "Car" && action == "Index" ? "active" : "")" asp-area="" asp-controller="Car" asp-action="Index">Moje pojazdy</a>
                             </li>
                         }
-    
-    @if (User.Identity.IsAuthenticated)
-    {
-        <li class="nav-item">
-            <a class="nav-link text-dark @(controller == "Repair" && action == "Index" ? "active" : "")" 
-               asp-area="" asp-controller="Repair" asp-action="Index">Moje naprawy</a>
-        </li>
-    }
 
-  
+                        @if (User.Identity.IsAuthenticated)
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-dark @(controller == "Repair" && action == "Index" ? "active" : "")" asp-area="" asp-controller="Repair" asp-action="Index">Moje naprawy</a>
+                            </li>
+                        }
+
                         @if (User.IsInRole("Admin") || User.IsInRole("Mechanic"))
                         {
-            <li class="nav-item">
-                <a class="nav-link text-dark @(controller == "User" && action == "Index" ? "active" : "")" 
-                   asp-area="" asp-controller="User" asp-action="Index">Zarządzanie</a>
-            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark @(controller == "User" && action == "Index" ? "active" : "")" asp-area="" asp-controller="User" asp-action="Index">Zarządzanie</a>
+                            </li>
                         }
                     </ul>
-                    <partial name="_LoginPartial"/>
+                    <partial name="_LoginPartial" />
                 </div>
             </div>
         </nav>

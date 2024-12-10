@@ -14,13 +14,8 @@ namespace Car.Domain.Entities
         public string? LastName { get; set; } = default!;
         public string? PIN { get; set; }
         public UserContactDetails? ContactDetails { get; set; } = default!;
-
-        
- 
         public ICollection<Car> Cars { get; set; } = new List<Car>();
-
-        
-        public ICollection<Repair> Repairs { get; set; } = new List<Repair>();
+         public ICollection<Repair> Repairs { get; set; } = new List<Repair>();
 
         
     }

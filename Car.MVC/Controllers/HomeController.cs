@@ -3,63 +3,62 @@ using Microsoft.AspNetCore.Mvc;
 using Car.MVC.Models;
 using MediatR;
 
-namespace Car.MVC.Controllers;
-
-public class HomeController : Controller
+namespace Car.MVC.Controllers
 {
-    private readonly ILogger<HomeController> _logger;
-    private readonly IMediator _mediator;
-
-    public HomeController(ILogger<HomeController> logger)
+    public class HomeController : Controller
     {
-        _logger = logger;
-    }
+        private readonly ILogger<HomeController> _logger;
+        private readonly IMediator _mediator;
 
-    public IActionResult Index()
-    {
-        return View();
-    }
-
-    public IActionResult NoAccess()
-    {
-        return View();
-    }
-
-    public IActionResult About()
-    {
-        var model = new About()
+        public HomeController(ILogger<HomeController> logger)
         {
-            title = "Car",
-            description = "Opis",
-            tags= new List<string>() {"car", "app", "free"}
-        };
-        return View(model);
-    }
+            _logger = logger;
+        }
 
-    public IActionResult Privacy()
-    {
-        var model = new List<Person>()
+        public IActionResult Index()
         {
+            return View();
+        }
 
-            new Person()
+        public IActionResult NoAccess()
+        {
+            return View();
+        }
+
+        public IActionResult About()
+        {
+            var model = new About
             {
-                FirstName= "Jan",
-                LastName= "Kowalski"
-            },
+                title = "Car",
+                description = "Opis",
+                tags = new List<string> { "car", "app", "free" }
+            };
+            return View(model);
+        }
 
-            new Person()
+        public IActionResult Privacy()
+        {
+            var model = new List<Person>
             {
-                FirstName= "Adam",
-                LastName= "Małysz"
-            },
-        };
+                new Person
+                {
+                    FirstName = "Jan",
+                    LastName = "Kowalski"
+                },
+                new Person
+                {
+                    FirstName = "Adam",
+                    LastName = "Małysz"
+                }
+            };
 
-        return View(model);
-    }
+            return View(model);
+        }
 
-    [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-    public IActionResult Error()
-    {
-        return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
+        public IActionResult Error()
+        {
+            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        }
     }
 }

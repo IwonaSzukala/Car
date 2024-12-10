@@ -10,10 +10,6 @@ using FluentValidation.AspNetCore;
 using MediatR;
 using Microsoft.Extensions.DependencyInjection;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Car.Application.Extensions
 {
@@ -21,13 +17,12 @@ namespace Car.Application.Extensions
     {
         public static void AddApplication(this IServiceCollection services)
         {
-            services.AddScoped<IUserContext,UserContext>();
+            services.AddScoped<IUserContext, UserContext>();
 
             services.AddMediatR(typeof(CreateCarCommand));
             services.AddMediatR(typeof(CreateRepairCommand));
             services.AddMediatR(typeof(CreateUserCommand));
 
-            
             services.AddScoped(provider => new MapperConfiguration(cfg =>
             {
                 var scope = provider.CreateScope();
@@ -36,8 +31,7 @@ namespace Car.Application.Extensions
                 cfg.AddProfile(new RepairMappingProfile(userContext));
                 cfg.AddProfile(new RepairWithCarMappingProfile(userContext));
                 cfg.AddProfile(new UserMappingProfile());
-            }).CreateMapper()
-            );
+            }).CreateMapper());
 
             services.AddValidatorsFromAssemblyContaining<CreateCarCommandValidator>()
                 .AddFluentValidationAutoValidation()
@@ -46,7 +40,6 @@ namespace Car.Application.Extensions
             services.AddValidatorsFromAssemblyContaining<CreateUserCommandValidator>()
                 .AddFluentValidationAutoValidation()
                 .AddFluentValidationClientsideAdapters();
-
         }
     }
 }

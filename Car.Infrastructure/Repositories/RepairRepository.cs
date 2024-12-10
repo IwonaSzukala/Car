@@ -14,13 +14,16 @@ namespace Car.Infrastructure.Repositories
     internal class RepairRepository : IRepairRepository
     {
         private readonly CarDbContext _dbContext;
+
         public RepairRepository(CarDbContext dbContext)
         {
             _dbContext = dbContext;
         }
 
         public async Task<IEnumerable<Domain.Entities.Repair>> GetAll()
-            => await _dbContext.Repairs.ToListAsync();
+        {
+            return await _dbContext.Repairs.ToListAsync();
+        }
 
         public async Task Create(Domain.Entities.Repair repair)
         {
@@ -29,7 +32,12 @@ namespace Car.Infrastructure.Repositories
         }
 
         public async Task<IEnumerable<Repair>> GetAllWithCars()
-            => await _dbContext.Repairs.Include(r => r.Car).Include(r => r.Mechanic).ToListAsync();
+        {
+            return await _dbContext.Repairs
+                .Include(r => r.Car)
+                .Include(r => r.Mechanic)
+                .ToListAsync();
+        }
 
         public async Task<IEnumerable<Repair>> GetByUsername(string username)
         {
@@ -39,14 +47,19 @@ namespace Car.Infrastructure.Repositories
                 .ThenInclude(c => c.User)
                 .Where(r => r.Car.User.UserName == username)
                 .ToListAsync();
+
             return repairs;
         }
 
         public async Task<Domain.Entities.Repair?> GetById(int id)
-            => await _dbContext.Repairs.FirstOrDefaultAsync(cw => cw.Id == id);
+        {
+            return await _dbContext.Repairs.FirstOrDefaultAsync(cw => cw.Id == id);
+        }
 
         public Task Commit()
-            => _dbContext.SaveChangesAsync();
+        {
+            return _dbContext.SaveChangesAsync();
+        }
 
         public async Task<IEnumerable<Repair>> GetRepairByUserId(string userId)
         {
@@ -56,6 +69,7 @@ namespace Car.Infrastructure.Repositories
                 .ThenInclude(c => c.User)
                 .Where(r => r.Car.User.Id == userId)
                 .ToListAsync();
+
             return repairs;
         }
     }
