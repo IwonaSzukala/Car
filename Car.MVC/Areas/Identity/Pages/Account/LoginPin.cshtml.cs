@@ -54,7 +54,7 @@ namespace Car.MVC.Areas.Identity.Pages.Account
             [DataType(DataType.Password)]
             public string Pin { get; set; }
 
-            [Display(Name = "Remember me?")]
+            [Display(Name = "Zapamiętaj dane logowania")]
             public bool RememberMe { get; set; }
         }
 
