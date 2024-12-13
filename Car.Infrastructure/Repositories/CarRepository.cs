@@ -29,11 +29,11 @@ namespace Car.Infrastructure.Repositories
             return await _dbContext.Cars.ToListAsync();
         }
 
-        public async Task<Domain.Entities.Car?> GetByUsername(string username)
+        public async Task<IEnumerable<Domain.Entities.Car?>> GetByUsername(string username)
         {
             return await _dbContext.Cars
                 .Include(c => c.User)
-                .FirstOrDefaultAsync(c => c.User.UserName == username);
+                .Where(c => c.User.UserName == username).ToListAsync();
         }
 
         public Task<Domain.Entities.Car?> GetByRegistrationNumber(string registrationNumber)

@@ -11,7 +11,7 @@ namespace Car.Domain.Interfaces
     {
         Task Create(Domain.Entities.Car car);
         Task<IEnumerable<Domain.Entities.Car>> GetAll();
-        Task<Domain.Entities.Car> GetByUsername(string username);
+        Task<IEnumerable<Domain.Entities.Car?>> GetByUsername(string username);
         Task<Domain.Entities.Car?> GetById(int id);
         Task<Domain.Entities.Car?> GetByRegistrationNumber(string registrationNumber);
         Task<Domain.Entities.Car?> GetByVIN(string vin);

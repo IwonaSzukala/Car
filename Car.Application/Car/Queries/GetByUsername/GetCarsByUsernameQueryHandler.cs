@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Car.Application.Car.Queries.GetByUsername
 {
-    public class GetCarsByUsernameQueryHandler : IRequestHandler<GetCarsByUsernameQuery, CarDto>
+    public class GetCarsByUsernameQueryHandler : IRequestHandler<GetCarsByUsernameQuery, IEnumerable<CarDto>>
     {
         private readonly ICarRepository _carRepository;
         private readonly IMapper _mapper;
@@ -20,7 +20,7 @@ namespace Car.Application.Car.Queries.GetByUsername
         
         }
         
-        public async Task<CarDto?> Handle(GetCarsByUsernameQuery request, CancellationToken cancellationToken)
+        public async Task<IEnumerable<CarDto?>> Handle(GetCarsByUsernameQuery request, CancellationToken cancellationToken)
         {
             var car = await _carRepository.GetByUsername(request.Username);
 
@@ -29,7 +29,7 @@ namespace Car.Application.Car.Queries.GetByUsername
                 return null; 
             }
 
-            var dto = _mapper.Map<CarDto>(car);
+            var dto = _mapper.Map<IEnumerable<CarDto>>(car);
 
             return dto;
         }

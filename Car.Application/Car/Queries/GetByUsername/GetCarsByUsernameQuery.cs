@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Car.Application.Car.Queries.GetByUsername
 {
-    public class GetCarsByUsernameQuery : IRequest<CarDto>
+    public class GetCarsByUsernameQuery : IRequest<IEnumerable<CarDto>>
     {
         public string Username { get; set; }
         public GetCarsByUsernameQuery(string username)
