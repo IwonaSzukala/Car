@@ -51,7 +51,7 @@ namespace Car.MVC.Controllers
         }
 
         [HttpPost]
-        [Authorize]
+        [Authorize(Roles = "Mechanic, Admin")]
         [Route("Car/{id}/Edit")]
         public async Task<IActionResult> Edit(int id, EditCarCommand command)
         {
@@ -64,16 +64,11 @@ namespace Car.MVC.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        [Authorize]
+        [Authorize(Roles = "Mechanic, Admin")]
         [Route("Car/{id}/Edit")]
         public async Task<IActionResult> Edit(int id)
         {
             var dto = await _mediator.Send(new GetCarByIdQuery(id));
-
-            if (!dto.IsEditable || !dto.IsVisible)
-            {
-                return RedirectToAction("NoAccess", "Home");
-            }
 
             EditCarCommand model = _mapper.Map<EditCarCommand>(dto);
             return View(model);
